@@ -7,6 +7,7 @@ import React, { Component, PropTypes } from 'react';
 
 import { Pages } from '../../lib/pages.js';
 
+import { MenuItem } from './menuItem.jsx';
 
 
 //export const Navigation = () => (
@@ -30,7 +31,7 @@ export default class Navigation extends Component {
 
 	renderRoutes() {
 		return this.getPages().map((page) => (
-			<MenuItem linkType={page.linkType} link={page.link} page={page.name} />
+			<MenuItem page={page.title} />
 		));
 	}
 
@@ -40,24 +41,11 @@ export default class Navigation extends Component {
 		return (
 			<div className="Menu">
 				<ul>
-					{this.rednerRoutes()}
+					{this.renderRoutes()}
 				</ul>
 			</div>
-		/*	
-		return (
-			<div className="Menu">
-				<ul>
-					<li><IndexLink to="/" activeClassName="active">Home</IndexLink></li>
-					<li><Link to="/portfolio" activeClassName="active">Prace</Link></li>
-					<li><Link to="/studio" activeClassName="active">Studio</Link></li>
-					<li><Link to="/blog" activeClassName="active">Blog</Link></li>
-					<li><Link to="/contact" activeClassName="active">Kontakt</Link></li>
-				</ul>
-			</div>
-		);
-		*/
+		)
 	}
-//)
 }
 
 export default createContainer(() => {
