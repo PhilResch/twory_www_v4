@@ -7,7 +7,7 @@ import React, { Component, PropTypes } from 'react';
 
 import { Pages } from '../../lib/pages.js';
 
-import { MenuItem } from './menuItem.jsx';
+import MenuItem from './menuItem.jsx';
 
 
 //export const Navigation = () => (
@@ -29,9 +29,18 @@ export default class Navigation extends Component {
 		}
 	}	
 
+	getPages() {
+		var pageTitles = [];
+		for (let i=0; i < this.props.pages.length; i++) {
+			pageTitles.push({_id: i, title: this.props.pages[i].title});
+		}
+		console.log("pageTitles: " + JSON.stringify(pageTitles));
+		return pageTitles;
+	}
+
 	renderRoutes() {
 		return this.getPages().map((page) => (
-			<MenuItem page={page.title} />
+			<MenuItem key={page._id} page={page} />
 		));
 	}
 
@@ -56,7 +65,6 @@ export default createContainer(() => {
 	const pagesCollectionExists = !loading //&& !!page;
 
 	return {
-		//pages: Pages.find({}).fetch(),
 		pages: pagesCollectionExists ? Pages.find({}).fetch() : "Collection not ready",
 		currentUser: Meteor.user(),
 	};
