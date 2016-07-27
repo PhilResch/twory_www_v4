@@ -14,10 +14,6 @@ import { Contact } from '../../ui/pages/contact.jsx';
 
 import { NotFound } from '../../ui/pages/notFound.jsx';
 
-import RouterItem from '../../ui/components/routerItem.jsx';
-
-
-import RouterComponent from '../../ui/components/routerComponent.jsx';
 
 Meteor.startup( () => {
 	render(
