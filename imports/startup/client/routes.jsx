@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import { render } from 'react-dom';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import { createContainer } from 'meteor/react-meteor-data';
 
 import { Index } from '../../ui/components/index.jsx';
 import { App } from '../../ui/layouts/app.jsx';
+import { Pages } from '../../lib/pages.js';
 
 import { Portfolio } from '../../ui/pages/portfolio.jsx';
 import { Studio } from '../../ui/pages/studio.jsx';
@@ -11,6 +13,11 @@ import { Blog } from '../../ui/pages/blog.jsx';
 import { Contact } from '../../ui/pages/contact.jsx';
 
 import { NotFound } from '../../ui/pages/notFound.jsx';
+
+import RouterItem from '../../ui/components/routerItem.jsx';
+
+
+import RouterComponent from '../../ui/components/routerComponent.jsx';
 
 Meteor.startup( () => {
 	render(
@@ -26,4 +33,6 @@ Meteor.startup( () => {
 		</Router>,
 		document.getElementById( 'render-target' )
 	);
+	
 });
+
