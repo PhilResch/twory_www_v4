@@ -9,7 +9,7 @@ export default class MenuItem extends Component {
 		return link;
 	}	
 
-	renderMenuItems() {
+	renderMenuLinks() {
 		if (this.props.page._id === 0) {
 			return (
 				<IndexLink to={this.pageLink()}>
@@ -28,7 +28,7 @@ export default class MenuItem extends Component {
 	render() {
 		return(
 			<li>
-				{this.renderMenuItems()}	
+				{this.renderMenuLinks()}	
 			</li>	
 		);
 	}

@@ -12,11 +12,13 @@ if (Meteor.isServer) {
 }
 
 Meteor.methods({
-	'pages.insert'(page) {
+	'pages.insert'(page, component) {
 		check(page, String);
+		check (component, String);
 		Pages.insert({
 			title: page,
 			createdAt: new Date(),
+			component: component,
 //			owner: this.userId,
 //			username: Meteor.users.findOne(this.userId).username,
 		});
