@@ -23,7 +23,7 @@ export default class Navigation extends Component {
 			if (this.props.pages.length === 0) {
 				console.log("Pages collection is empty. Filling it with defaults.");
 				let defaultPages = [
-					["Home", "index.jsx" ],
+					["Index", "index.jsx" ],
 					["Portfolio", "portfolio.jsx" ], 
 					["Blog", "blog.jsx" ],
 					["Contact", "contact.jsx" ]
@@ -41,7 +41,6 @@ export default class Navigation extends Component {
 		for (let i=0; i < this.props.pages.length; i++) {
 			pages.push({_id: i, title: this.props.pages[i].title});
 		}
-//		console.log("pages: " + JSON.stringify(pages));
 		return pages;
 	}
 
@@ -55,10 +54,26 @@ export default class Navigation extends Component {
 		this.createDefaultPages();
 
 		return (
-			<div className="Menu">
-				<ul>
-					{this.renderLinks()}
-				</ul>
+			<div id="navbar" className="layout">
+				<div id="logo" className="layout__item u-3/12">
+					<img src="/img/twory_www_logo_v1.svg" alt="Twory Studio logo"/>
+				</div>
+
+				<div id="mainMenu" className="layout__item u-6/12">
+					<ul className="list-inline">
+						{this.renderLinks()}
+					</ul>
+				</div>
+
+				<div id="searchBox" className="layout__item layout--right u-2/12">
+					<input type="submit" value="Złóż zamówienie"/>
+				</div>
+
+				<div id="searchBox" className="layout__item  layout--right u-1/12">
+					<i className="fa fa-facebook-official fontAwesomeIcon"></i>
+					<i className="fa fa-twitter-square fontAwesomeIcon"></i>
+					<i className="fa fa-pinterest-square fontAwesomeIcon"></i>
+				</div>
 			</div>
 		)
 	}

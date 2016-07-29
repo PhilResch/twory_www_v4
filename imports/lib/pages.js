@@ -23,8 +23,4 @@ Meteor.methods({
 //			username: Meteor.users.findOne(this.userId).username,
 		});
 	},
-
-	'pages.isEmpty'() {
-		return Pages.find().count();
-	}
 });
