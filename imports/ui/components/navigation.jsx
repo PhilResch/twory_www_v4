@@ -1,18 +1,16 @@
-//import React from 'react';
-//import { IndexLink, Link } from 'react-router';
 import { createContainer } from 'meteor/react-meteor-data';
 
 import { render } from 'react-dom';
 import React, { Component, PropTypes } from 'react';
 
-import { Pages } from '../../lib/pages.js';
-import { ContentCollection } from '../../lib/content.js';
+import { PagesCollection } from '../../lib/pagesCollection.js';
 
 import MenuItem from './menuItem.jsx';
 
 export default class Navigation extends Component {
 	createDefaultPages() {
-			if (this.props.pages.length === 0) {
+		console.log("createDefaultPages() called.")
+			if (this.props.PagesCollection.length === 0) {
 				console.log("Pages collection is empty. Filling it with defaults.");
 				let defaultPages = [
 					["Index", "index.jsx" ],
@@ -23,7 +21,7 @@ export default class Navigation extends Component {
 				];
 
 			for (let i=0; i < defaultPages.length; i++) {
-				Meteor.call('pages.insert', defaultPages[i][0], defaultPages[i][1]);
+				Meteor.call('PagesCollection.insert', defaultPages[i][0], defaultPages[i][1]);
 				console.log("Inserted page: " + defaultPages[i][0] + " and component: " + defaultPages[i][1]);
 			}
 		}
@@ -31,8 +29,8 @@ export default class Navigation extends Component {
 
 	getPages() {
 		let pages = [];
-		for (let i=0; i < this.props.pages.length; i++) {
-			pages.push({_id: i, title: this.props.pages[i].title});
+		for (let i=0; i < this.props.PagesCollection.length; i++) {
+			pages.push({_id: i, title: this.props.PagesCollection[i].title});
 		}
 		return pages;
 	}
@@ -72,15 +70,16 @@ export default class Navigation extends Component {
 	}
 }
 
-export default createContainer(() => {
+export default NavigationContainer = createContainer(() => {
 	// https://guide.meteor.com/react.html
-	const pagesCollectionHandle = Meteor.subscribe('pages');
-	const loading = !pagesCollectionHandle.ready();
-	const page = Pages.findOne();
+	const PagesCollectionHandle = Meteor.subscribe('PagesCollection');
+	const loading = !PagesCollectionHandle.ready();
+//	const page = PagesCollection.findOne();
 	const pagesCollectionExists = !loading //&& !!page;
+	console.log("PagesCollectionHandle looks as follows: " + JSON.stringify(PagesCollectionHandle));
 
 	return {
-		pages: pagesCollectionExists ? Pages.find({}).fetch() : "Collection not ready",
+		PagesCollection: pagesCollectionExists ? PagesCollectionHandle.find({}).fetch() : "Collection not ready",
 		currentUser: Meteor.user(),
 	};
 }, Navigation);

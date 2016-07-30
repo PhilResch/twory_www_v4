@@ -2,9 +2,9 @@ import { createContainer } from 'meteor/react-meteor-data';
 import { render } from 'react-dom';
 
 import React, { Component, PropTypes } from 'react';
-import { ContentCollection } from '../../lib/content.js';
+import { PortfolioCollection } from '../../lib/portfolioCollection.js';
 
-export class Portfolio extends Component { 
+export default class Portfolio extends Component { 
 	insertContent() {
 		console.log("Calling insertContent().");
 		let page = "portfolio";
@@ -16,17 +16,17 @@ export class Portfolio extends Component {
 			mainImage: "/img/1.jpg"
 		};
 
-		Meteor.call('contentCollection.insert', page, content);
+		Meteor.call('PortfolioCollection.insert', page, content);
 	}
 
 	renderContent() {
-		Meteor.subscribe('contentCollection');
-		if (Meteor.subscribe('contentCollection').ready()) {
+		if (this.props.PortfolioContent) {
 			content = this.props.PortfolioContent.length;
-			console.log(content);
+			console.log("renderContent reporting value of 'content:" + content);
 		} else {
-			console.log("This fucking shit just doesn't get ready");
+			console.log("PortfolioContent doesn't seem ready.");
 		}
+//		console.log(Meteor.call('PortfolioCollection.get'));
 	}
 
 	render() {
@@ -41,18 +41,18 @@ export class Portfolio extends Component {
 
 }
 
-export default createContainer(() => {
+export default PortfolioContainer = createContainer(() => {
 	// https://guide.meteor.com/react.html
-//	const PortfolioContent = Meteor.subscribe('ContentCollection', "portfolio");
-	console.log("contentCollection READY!");
-	const PortfolioContent = Meteor.subscribe('contentCollection');
+//	const PortfolioContent = Meteor.subscribe('PortfolioCollection', "portfolio");
+	const PortfolioContent = Meteor.subscribe('PortfolioCollection');
 	const loading = !PortfolioContent.ready();
-	const contentItem = PortfolioContent.findOne();
+	console.log("Is PortfolioCollection ready: " + !loading);
+	console.log("PortfolioContent looks as follows: " + PortfolioContent);
+//	const portfolioItem = PortfolioContent.findOne();
 	const PortfolioContentExists= !loading ;
 
 	return {
 		PortfolioContent: PortfolioContentExists ? PortfolioContent.find({}).fetch() : "Collection not ready",
-//		huj: ["ja", "pierdole", "to", "gówno"],
 		currentUser: Meteor.user(),
 	};
 }, Portfolio);
