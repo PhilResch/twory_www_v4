@@ -1,7 +1,7 @@
 import { render } from 'react-dom';
 import React, { Component, PropTypes } from 'react';
 
-export default class Content extends Component {
+export class Content extends Component {
 
 	render() {
 		return(

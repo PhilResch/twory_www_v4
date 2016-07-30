@@ -5,7 +5,9 @@ import { createContainer } from 'meteor/react-meteor-data';
 
 import { Index } from '../../ui/components/index.jsx';
 import { App } from '../../ui/layouts/app.jsx';
+
 import { Pages } from '../../lib/pages.js';
+import { ContentCollection } from '../../lib/content.js';
 
 import { Portfolio } from '../../ui/pages/portfolio.jsx';
 import { Studio } from '../../ui/pages/studio.jsx';

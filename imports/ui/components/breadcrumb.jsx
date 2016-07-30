@@ -1,7 +1,7 @@
 import { render } from 'react-dom';
 import React, { Component, PropTypes } from 'react';
 
-export default class Breadcrumb  extends Component {
+export class Breadcrumb  extends Component {
 
 	render() {
 		return(

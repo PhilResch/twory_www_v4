@@ -1,0 +1,53 @@
+{
+	"Portfolio" : 
+		{
+			"Branding" : [
+				{
+					"title" : "Kancelaria Skibinski",
+					"mainImage": "/img/1.jpg",
+					"content": "Lorem ipsum dolor sit amat",
+					"images" : 
+							[ 
+								"/img/1a.jpg",
+								"/img/1b.jpg",
+								"/img/1c.jpg",
+							]	
+				},
+				{
+					"title" : "Wyborowa S.A.",
+					"mainImage": "/img/2.jpg",
+					"content": "Lorem ipsum dolor sit amat",
+					"images" : 
+							[ 
+								"/img/2a.jpg",
+								"/img/2b.jpg",
+								"/img/2c.jpg",
+							]
+				}
+			],
+			"Webdesign" : [
+				{
+					"title" : "AT System",
+					"mainImage": "/img/3.jpg",
+					"content": "Lorem ipsum dolor sit amat",
+					"images" :
+							[
+								"/img/3a.jpg",
+								"/img/3b.jpg",
+								"/img/3c.jpg",
+							]	
+				},
+				{
+					"title" : "Klub Zakupowy",
+					"mainImage": "/img/4.jpg",
+					"content": "Lorem ipsum dolor sit amat",
+					"images" :
+							[
+								"/img/4a.jpg",
+								"/img/4b.jpg",
+								"/img/4c.jpg",
+							]	
+				}
+			]	
+		}
+}
