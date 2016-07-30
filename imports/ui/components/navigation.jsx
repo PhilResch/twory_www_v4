@@ -9,8 +9,7 @@ import MenuItem from './menuItem.jsx';
 
 export default class Navigation extends Component {
 	createDefaultPages() {
-		console.log("createDefaultPages() called.")
-			if (this.props.PagesCollection.length === 0) {
+			if (this.props.PagesCollection && this.props.PagesCollection === 0) {
 				console.log("Pages collection is empty. Filling it with defaults.");
 				let defaultPages = [
 					["Index", "index.jsx" ],
