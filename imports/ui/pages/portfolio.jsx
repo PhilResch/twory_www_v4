@@ -1,10 +1,14 @@
 import { createContainer } from 'meteor/react-meteor-data';
+import WTF from '../../lib/collectionsContainer.jsx';
+
 import { render } from 'react-dom';
 
 import React, { Component, PropTypes } from 'react';
-import { ContentCollection } from '../../lib/content.js';
+//import { ContentCollection } from '../../lib/content.js';
 
-export class Portfolio extends Component { 
+//import { ContentCollection } from '../../lib/pages.js';
+
+export default class Portfolio extends Component { 
 	insertContent() {
 		console.log("Calling insertContent().");
 		let page = "portfolio";
@@ -27,6 +31,7 @@ export class Portfolio extends Component {
 		} else {
 			console.log("This fucking shit just doesn't get ready");
 		}
+		console.log("Please work " + this.props.pages.length);
 	}
 
 	render() {
@@ -41,18 +46,3 @@ export class Portfolio extends Component {
 
 }
 
-export default createContainer(() => {
-	// https://guide.meteor.com/react.html
-//	const PortfolioContent = Meteor.subscribe('ContentCollection', "portfolio");
-	console.log("contentCollection READY!");
-	const PortfolioContent = Meteor.subscribe('contentCollection');
-	const loading = !PortfolioContent.ready();
-	const contentItem = PortfolioContent.findOne();
-	const PortfolioContentExists= !loading ;
-
-	return {
-		PortfolioContent: PortfolioContentExists ? PortfolioContent.find({}).fetch() : "Collection not ready",
-//		huj: ["ja", "pierdole", "to", "gówno"],
-		currentUser: Meteor.user(),
-	};
-}, Portfolio);

@@ -9,7 +9,9 @@ import { App } from '../../ui/layouts/app.jsx';
 import { Pages } from '../../lib/pages.js';
 import { ContentCollection } from '../../lib/content.js';
 
-import { Portfolio } from '../../ui/pages/portfolio.jsx';
+import Portfolio from '../../ui/pages/portfolio.jsx';
+//import Portfolio from '../../ui/components/portfolio.jsx';
+
 import { Studio } from '../../ui/pages/studio.jsx';
 import { Blog } from '../../ui/pages/blog.jsx';
 import { Contact } from '../../ui/pages/contact.jsx';

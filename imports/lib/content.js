@@ -1,10 +1,10 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 //import { check } from 'meteor/check';
-import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+//import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 
-export const ContentCollection = new Mongo.Collection('contentCollection');
-
+//export const ContentCollection = new Mongo.Collection('contentCollection');
+/*
 let PortfolioSchema = new SimpleSchema ({
 	page: { type: String },
 	category: { type: String },
@@ -12,6 +12,7 @@ let PortfolioSchema = new SimpleSchema ({
 	content: { type: String },
 	mainImage: { type: String }
 });
+*/
 /*
 if (Meteor.isServer) {
 	Meteor.publish('ContentCollection',
@@ -27,7 +28,7 @@ if (Meteor.isServer) {
 	);
 }
 */
-
+/*
 if (Meteor.isServer) {
 	Meteor.publish('contentCollection',
 		function returnContentOf() {
@@ -40,7 +41,7 @@ Meteor.methods({
 	'contentCollection.insert'(page, content) {
 		switch (page) {
 			case "portfolio":
-				PortfolioSchema.validate(content);
+//				PortfolioSchema.validate(content);
 				ContentCollection.insert(content);
 				console.log("cotentCollection.insert: " + JSON.stringify(content));
 				break;
@@ -52,3 +53,4 @@ Meteor.methods({
 		//ContentCollection.insert( content );
 	},
 });
+*/
