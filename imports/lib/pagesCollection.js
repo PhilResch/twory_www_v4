@@ -2,12 +2,13 @@ import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { check } from 'meteor/check';
 
-export const PagesCollection = new Mongo.Collection('PagesColllection');
+//export const PagesCollection = new Mongo.Collection('PagesColllection');
 
 if (Meteor.isServer) {
 	Meteor.publish('PagesCollection',
 		function publishPagesCollection() {
 			//return PagesCollection.find();
+			console.log("PagesCollection published (I hope)");
 			return PagesCollection.find();
 		}
 	);
@@ -24,7 +25,7 @@ Meteor.methods({
 //			owner: this.userId,
 //			username: Meteor.users.findOne(this.userId).username,
 		});
-		console.log("PagesCollection.insert inserted: " + page + " and " + component);
+		console.log("PagesCollection.insert method inserted: " + page + " and " + component);
 		console.log("PagesCollection now holds: " + JSON.stringify(PagesCollection.find({}).fetch()));
 	},
 });
