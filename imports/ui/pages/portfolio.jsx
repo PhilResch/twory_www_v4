@@ -41,4 +41,18 @@ export default class Portfolio extends Component {
 
 }
 
+export default PortfolioContainer = createContainer(() => {
+	// https://guide.meteor.com/react.html
+//	const PortfolioContent = Meteor.subscribe('PortfolioCollection', "portfolio");
+	const PortfolioContent = Meteor.subscribe('PortfolioCollection');
+	const loading = !PortfolioContent.ready();
+	console.log("Is PortfolioCollection ready: " + !loading);
+	console.log("PortfolioContent looks as follows: " + PortfolioContent);
+//	const portfolioItem = PortfolioContent.findOne();
+	const PortfolioContentExists= !loading ;
 
+	return {
+		PortfolioContent: PortfolioContentExists ? PortfolioContent.find({}).fetch() : "Collection not ready",
+		currentUser: Meteor.user(),
+	};
+}, Portfolio);
