@@ -10,22 +10,49 @@ import { PagesCollection } from '../../../lib/pagesCollection.js';
 import MenuItem from './menuItem.jsx';
 
 export default class Navigation extends Component {
+	getDefaultPages() {
+		let defaultPages = [ 
+				{
+					title: "Index",
+					component: "index.jsx"
+				},
+				{
+					title: "Portfolio",
+					component: "portfolio.jsx"	
+				},
+				{
+					title: "Studio",
+					component: "studio.jsx"	
+				},
+				{
+					title: "Blog",
+					component: "blog.jsx"	
+				},	
+				{
+					title: "Kontakt",
+					component: "contact.jsx"	
+				},					
+			];
+		return defaultPages;
+	}
+
 	createDefaultPages() {
-//			console.log("Is the pagesCollection emtpy? " + Meteor.call('pagesCollection.isEmpty'));
-//			if (Meteor.call('pagesCollection.isEmpty') == true) {
-			console.log("pagesCollection.length is : " + this.props.pagesCollection.length);
-			if (this.props.pagesCollection.length == 0) {
-				console.log("Pages collection is empty. Filling it with defaults.");
-				let defaultPages =  
-					{
-						title: "Index",
-						component: "index.jsx"
-					};
-				Meteor.call('pagesCollection.insert', defaultPages);
-			}
+		let defaultPages = this.getDefaultPages();
+		for (let i=0; i < defaultPages.length; i++) {
+			Meteor.call('pagesCollection.insert', defaultPages[i]);
+		}
 	}	
 
+	collectionIsReadyAndEmpty() {
+		let isCollectionReady = this.props.pagesCollectionIsReady === true;
+		let isCollectionEmpty = this.props.pagesCollection.length === 0;
+		let isCollectionReadyAndEmpty = isCollectionReady && isCollectionEmpty;
+		return isCollectionReadyAndEmpty;
+	}
+
 	getPages() {
+		if (this.collectionIsReadyAndEmpty()) { this.createDefaultPages(); }	
+
 		let pages = [];
 		for (let i=0; i < this.props.pagesCollection.length; i++) {
 			pages.push({_id: i, title: this.props.pagesCollection[i].title});
@@ -40,8 +67,6 @@ export default class Navigation extends Component {
 	}
 
 	render() {
-		this.createDefaultPages();
-
 		return (
 			<div id="navbar" className="layout">
 				<div id="logo" className="layout__item u-3/12">
@@ -51,6 +76,7 @@ export default class Navigation extends Component {
 				<div id="mainMenu" className="layout__item u-6/12">
 					<ul className="list-inline">
 						{this.renderLinks()}
+						
 					</ul>
 				</div>
 
@@ -70,10 +96,13 @@ export default class Navigation extends Component {
 
 
 export default createContainer(() => {
-  Meteor.subscribe('pagesCollection');
-
+  pagesCollectionSubscription = Meteor.subscribe('pagesCollection');
+  loading = !pagesCollectionSubscription.ready();
+  pagesCollectionExists = !loading;
+  console.log("Is the pagesCollection loading? :" + loading);
   return {
-    pagesCollection: PagesCollection.find({}).fetch(),
-//    currentUser: Meteor.user(),
+	pagesCollectionIsReady: pagesCollectionSubscription.ready() ? true : false,
+    pagesCollection: pagesCollectionExists ? PagesCollection.find({}).fetch() : [],
+    currentUser: Meteor.user(),
   };
 }, Navigation);
