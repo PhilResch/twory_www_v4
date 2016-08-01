@@ -4,23 +4,25 @@ import { createContainer } from 'meteor/react-meteor-data';
 import { render } from 'react-dom';
 import React, { Component, PropTypes } from 'react';
 
-import { PagesCollection } from '../../api/pagesCollection.js';
+//import { PagesCollection } from '../../api/pagesCollection.js';
+import { PagesCollection } from '../../../lib/pagesCollection.js';
 
 import MenuItem from './menuItem.jsx';
 
 export default class Navigation extends Component {
 	createDefaultPages() {
-			console.log("FUCK THIS SHIT: " + Meteor.call('pagesCollection.isEmpty'));
-			if (Meteor.call('pagesCollection.isEmpty')) {
-			//if (this.props.pagesCollection.length === 0) {
+//			console.log("Is the pagesCollection emtpy? " + Meteor.call('pagesCollection.isEmpty'));
+//			if (Meteor.call('pagesCollection.isEmpty') == true) {
+			console.log("pagesCollection.length is : " + this.props.pagesCollection.length);
+			if (this.props.pagesCollection.length == 0) {
 				console.log("Pages collection is empty. Filling it with defaults.");
 				let defaultPages =  
 					{
 						title: "Index",
 						component: "index.jsx"
 					};
-			Meteor.call('pagesCollection.insert', defaultPages);
-		}
+				Meteor.call('pagesCollection.insert', defaultPages);
+			}
 	}	
 
 	getPages() {
@@ -72,6 +74,6 @@ export default createContainer(() => {
 
   return {
     pagesCollection: PagesCollection.find({}).fetch(),
-    currentUser: Meteor.user(),
+//    currentUser: Meteor.user(),
   };
 }, Navigation);
