@@ -4,12 +4,11 @@ import { check } from 'meteor/check';
 
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
-export var PagesCollection = new Mongo.Collection('pagesCollection');
+export const PagesCollection = new Mongo.Collection('pagesColllection');
 
 if (Meteor.isServer) {
 	console.log("This is the server speaking from pagesCollection");	
 	Meteor.publish('pagesCollection', function () {
-		console.log("Is publish ever called?");
 		return PagesCollection.find({});
 	});
 
@@ -32,9 +31,7 @@ Meteor.methods({
 	    });
   },
 	'pagesCollection.isEmpty'() {
-		console.log("pagesCollection.isEmpty responding");
-		console.log(PagesCollection.find().fetch().length);
-		let PageCount = PagesCollection.find().fetch().length;
-		return PageCount == 0 ? true : false;
+		return PagesCollection.find().fetch().length === 0 ?
+			true : false;
   }
 });
