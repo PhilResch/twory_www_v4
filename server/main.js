@@ -1,3 +1,3 @@
-import '../imports/api/portfolio.js';
-import '../imports/lib/pagesCollection.js';
-import '../imports/lib/portfolioCollection.js';
+//import '../imports/api/portfolio.js';
+import '../imports/api/pagesCollection.js';
+import '../imports/api/portfolioCollection.js';

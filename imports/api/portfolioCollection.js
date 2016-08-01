@@ -1,10 +1,10 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 //import { check } from 'meteor/check';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+//import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
 export const PortfolioCollection = new Mongo.Collection('PortfolioCollection');
-
+/*
 let PortfolioSchema = new SimpleSchema ({
 	page: { type: String },
 	category: { type: String },
@@ -12,6 +12,7 @@ let PortfolioSchema = new SimpleSchema ({
 	content: { type: String },
 	mainImage: { type: String }
 });
+/*
 /*
 if (Meteor.isServer) {
 	Meteor.publish('PortfolioCollection',

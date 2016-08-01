@@ -2,7 +2,7 @@ import { createContainer } from 'meteor/react-meteor-data';
 import { render } from 'react-dom';
 
 import React, { Component, PropTypes } from 'react';
-import { PortfolioCollection } from '../../lib/portfolioCollection.js';
+// import { PortfolioCollection } from '../../lib/portfolioCollection.js';
 
 export default class Portfolio extends Component { 
 	insertContent() {
@@ -44,15 +44,15 @@ export default class Portfolio extends Component {
 export default PortfolioContainer = createContainer(() => {
 	// https://guide.meteor.com/react.html
 //	const PortfolioContent = Meteor.subscribe('PortfolioCollection', "portfolio");
-	const PortfolioContent = Meteor.subscribe('PortfolioCollection');
-	const loading = !PortfolioContent.ready();
+	const PortfolioContentHandle = Meteor.subscribe('PortfolioCollection');
+	const loading = !PortfolioContentHandle.ready();
 	console.log("Is PortfolioCollection ready: " + !loading);
-	console.log("PortfolioContent looks as follows: " + PortfolioContent);
+	console.log("PortfolioContent looks as follows: " + JSON.stringify(PortfolioContentHandle.fetch()));
 //	const portfolioItem = PortfolioContent.findOne();
 	const PortfolioContentExists= !loading ;
 
 	return {
-		PortfolioContent: PortfolioContentExists ? PortfolioContent.find({}).fetch() : "Collection not ready",
+		PortfolioContent: PortfolioContentExists ? Meteor.subscribe('PortfolioCollection').find().fetch() : [],
 		currentUser: Meteor.user(),
 	};
 }, Portfolio);
