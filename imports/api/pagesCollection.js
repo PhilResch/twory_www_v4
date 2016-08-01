@@ -8,9 +8,10 @@ export const PagesCollection = new Mongo.Collection('pagesColllection');
 
 if (Meteor.isServer) {
 	console.log("This is the server speaking from pagesCollection");	
-	Meteor.publish('pagesCollection', function publishPages() {
-	return PagesCollection.find({});
-  });
+	Meteor.publish('pagesCollection', function () {
+		return PagesCollection.find({});
+	});
+
 }
 
 let PagesSchema = new SimpleSchema ({
@@ -28,5 +29,9 @@ Meteor.methods({
 //	      owner: this.userId,
 //	      username: Meteor.users.findOne(this.userId).username,
 	    });
+  },
+	'pagesCollection.isEmpty'() {
+		return PagesCollection.find().fetch().length === 0 ?
+			true : false;
   }
 });

@@ -10,7 +10,9 @@ import MenuItem from './menuItem.jsx';
 
 export default class Navigation extends Component {
 	createDefaultPages() {
-			if (this.props.pagesCollection.length === 0) {
+			console.log("FUCK THIS SHIT: " + Meteor.call('pagesCollection.isEmpty'));
+			if (Meteor.call('pagesCollection.isEmpty')) {
+			//if (this.props.pagesCollection.length === 0) {
 				console.log("Pages collection is empty. Filling it with defaults.");
 				let defaultPages =  
 					{
