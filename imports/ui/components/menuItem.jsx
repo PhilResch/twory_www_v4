@@ -12,7 +12,7 @@ export default class MenuItem extends Component {
 	renderMenuLinks() {
 		if (this.props.page._id === 0) {
 			return (
-				<IndexLink to={this.pageLink()}>
+				<IndexLink to="/">
 					{this.props.page.title}
 				</IndexLink>
 			)
