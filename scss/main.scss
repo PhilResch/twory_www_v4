@@ -1,0 +1,45 @@
+$inuit-responsive-settings: true;
+$inuit-enable-layout--flush: true;
+$inuit-enable-layout--middle: true;
+$inuit-enable-layout--right: true;
+$inuit-enable-media--responsive: true;
+
+$inuit-widths-columns: (
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+) !default;
+
+@import "node_modules/inuit-defaults/settings.defaults";
+@import "node_modules/inuit-responsive-settings/settings.responsive";
+
+@import "node_modules/inuit-functions/tools.functions";
+@import "node_modules/inuit-mixins/tools.mixins";
+@import "node_modules/inuit-tools-widths/tools.widths";
+@import "node_modules/inuit-responsive-tools/tools.responsive";
+
+@import "node_modules/inuit-normalize/generic.normalize";
+@import "node_modules/inuit-box-sizing/generic.box-sizing";
+
+@import "node_modules/inuit-page/base.page";
+@import "node_modules/inuit-layout/objects.layout";
+@import "node_modules/inuit-media/objects.media";
+
+@import "node_modules/objects.layout-whitespace-fix/objects.layout-whitespace-fix";
+
+@import "node_modules/inuit-pack/objects.pack";
+@import "node_modules/inuit-list-bare/objects.list-bare";
+@import "node_modules/inuit-list-inline/objects.list-inline";
+
+@import "node_modules/inuit-widths/trumps.widths";
+@import "node_modules/inuit-responsive-widths/trumps.widths-responsive";
+@import "node_modules/inuit-clearfix/trumps.clearfix";
