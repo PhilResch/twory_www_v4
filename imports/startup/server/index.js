@@ -14,3 +14,4 @@ import '../imports/api/api.js';
 */
 import '../../api/pagesCollection.js';
 import '../../api/portfolioCollection.js';
+import '../../api/postsCollection.js';

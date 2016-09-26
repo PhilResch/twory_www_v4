@@ -32,6 +32,10 @@ export default class Navigation extends Component {
 					title: "Kontakt",
 					component: "contact.jsx"	
 				},					
+				{
+					title: "Posts list",
+					component: "postsList.jsx"	
+				},
 			];
 		return defaultPages;
 	}
