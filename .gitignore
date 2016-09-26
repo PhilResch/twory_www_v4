@@ -47,6 +47,4 @@ Temporary Items
 .apdisk
 
 # Manually added directories
-.meteor/
-!.meteor/packages
 node_modules/
