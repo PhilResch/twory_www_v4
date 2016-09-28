@@ -29,11 +29,11 @@ export default class Navigation extends Component {
 					component: "blog.jsx"	
 				},	
 				{
-					title: "Kontakt",
+					title: "Contact",
 					component: "contact.jsx"	
 				},					
 				{
-					title: "Posts list",
+					title: "PostsList",
 					component: "postsList.jsx"	
 				},
 			];

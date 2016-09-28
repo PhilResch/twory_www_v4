@@ -3,8 +3,9 @@ import { render } from 'react-dom';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
 import { Index } from '../../ui/components/index.jsx';
+import { PostsList } from '../../ui/components/postsList.jsx';
+
 import { App } from '../../ui/layouts/app.jsx';
-//import { Portfolio } from '../../ui/pages/portfolio.jsx';
 import Portfolio from '../../ui/pages/portfolio.jsx';
 import { Studio } from '../../ui/pages/studio.jsx';
 import { Blog } from '../../ui/pages/blog.jsx';

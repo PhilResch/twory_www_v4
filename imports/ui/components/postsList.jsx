@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import React, { Component, PropTypes } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import { browserHistory } from 'react-router';
 
@@ -24,8 +25,13 @@ export default class PostsList extends Component {
         }
     }
     
+    insertNewPosts() {
+        Meteor.call('createNewPost');
+    }
+    
     render() {
         return (
+             /*
              <GridRow>
                 <GridColumn className="column">
                     <SuccessButton type="button" label="New Post" onClick={this.handleNewPost} />
@@ -33,6 +39,13 @@ export default class PostsList extends Component {
                     {this.renderPostsList()}
                 </GridColumn>
              </GridRow>
+             */
+             <div>
+                <h1>WHAT THE FUCK</h1>
+                {this.renderPostsList()}
+                <button type="button" label="New Post" onClick={this.handleNewPost} />
+                <button type="button" label="Insert Post" onClick={this.insertNewPost} />
+            </div>
         )
     }
 }

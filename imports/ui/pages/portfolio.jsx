@@ -1,36 +1,48 @@
+import { Meteor } from 'meteor/meteor';
+
 import { createContainer } from 'meteor/react-meteor-data';
 import { render } from 'react-dom';
 
 import React, { Component, PropTypes } from 'react';
-// import { PortfolioCollection } from '../../lib/portfolioCollection.js';
+import { PortfolioCollection } from '../../../lib/portfolioCollection.js';
 
 export default class Portfolio extends Component { 
-	insertContent() {
-		console.log("Calling insertContent().");
-		let page = "portfolio";
-		let content = {
-			page: page,
-			category: "branding",
-			title: "Kancelaria Skibiński",
-			content: "Lorem ipsum kurwa",
-			mainImage: "/img/1.jpg"
-		};
-
-		Meteor.call('PortfolioCollection.insert', page, content);
+	insertDefaultContent() {
+		if (this.collectionIsReadyAndEmpty()) {
+			console.log("Calling insertContent().");
+			let page = "portfolio";
+			let content = {
+				page: page,
+				category: "branding",
+				title: "Kancelaria Skibiński",
+				content: "Lorem ipsum kurwa",
+				mainImage: "/img/1.jpg"
+			};
+			Meteor.call('PortfolioCollection.insert', page, content);
+		}
+		else {
+			console.log("portfolioCollection is not empty. Nothing was inserted.");
+		}
 	}
 
+	collectionIsReadyAndEmpty() {
+		let isCollectionReady = this.props.portfolioCollectionIsReady === true;
+		let isCollectionEmpty = this.props.portfolioCollection.length === 0;
+		let isCollectionReadyAndEmpty = isCollectionReady && isCollectionEmpty;
+		return isCollectionReadyAndEmpty;
+	}	
+
 	renderContent() {
-		if (this.props.PortfolioContent) {
-			content = this.props.PortfolioContent.length;
-			console.log("renderContent reporting value of 'content:" + content);
+		if (this.props.portfolioCollection) {
+			content = this.props.portfolioCollection.length;
+			console.log("renderContent reporting length of " + content);
 		} else {
-			console.log("PortfolioContent doesn't seem ready.");
+			console.log("portfolioCollection doesn't seem ready.");
 		}
-//		console.log(Meteor.call('PortfolioCollection.get'));
 	}
 
 	render() {
-		this.insertContent();
+		this.insertDefaultContent();
 		return(
 			<div>
 				<h3>Pray this works</h3>
@@ -41,18 +53,15 @@ export default class Portfolio extends Component {
 
 }
 
-export default PortfolioContainer = createContainer(() => {
+export default createContainer(() => {
 	// https://guide.meteor.com/react.html
-//	const PortfolioContent = Meteor.subscribe('PortfolioCollection', "portfolio");
-	const PortfolioContentHandle = Meteor.subscribe('PortfolioCollection');
-	const loading = !PortfolioContentHandle.ready();
-	console.log("Is PortfolioCollection ready: " + !loading);
-	console.log("PortfolioContent looks as follows: " + JSON.stringify(PortfolioContentHandle.fetch()));
-//	const portfolioItem = PortfolioContent.findOne();
-	const PortfolioContentExists= !loading ;
-
+	portfolioCollectionSubscription = Meteor.subscribe('portfolioCollection');
+	loading = !portfolioCollectionSubscription.ready();
+	portfolioCollectionExists= !loading ;
+	console.log("Is portfolioCollectionSubscription ready: " + !loading);
 	return {
-		PortfolioContent: PortfolioContentExists ? Meteor.subscribe('PortfolioCollection').find().fetch() : [],
+		portfolioCollectionIsReady: portfolioCollectionSubscription.ready() ? true : false,
+		portfolioCollection: portfolioCollectionExists ? PortfolioCollection.find({}).fetch() : [],
 		currentUser: Meteor.user(),
 	};
 }, Portfolio);
