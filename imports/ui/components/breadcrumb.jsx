@@ -5,15 +5,17 @@ export class Breadcrumb  extends Component {
 
 	render() {
 		return(
-			<div id="topInfoBar" className="layout">
-				<div id="breadcrumb" className="layout__item u-6/12">
+			<div id="topInfoBar" className="o-layout">
+				<div id="breadcrumb" className="o-layout__item u-1/2">
 					<p >breadcrumb/Fuck/This/Shit/</p>
 				</div>
-				<div id="contactAndLanguage" className="layout__item  layout--right u-6/12">
-					<p id="contactInfo">tel. 48 601 183 700</p>
-					<p id="contactInfo">info@twory.studio</p>
-					<p id="langaugeSwitch">english</p>
-					<p id="langaugeSwitch">polski</p>
+				<div id="contactAndLanguage" className="o-layout__item  o-layout--right u-1/2">
+					<ul className="o-list-inline">
+						<li className="o-list-inline__item">tel. 48 601 183 700</li>
+						<li className="o-list-inline__item">info@twory.studio</li>
+						<li className="o-list-inline__item">english</li>
+						<li className="o-list-inline__item">polski</li>
+					</ul>
 			</div>
 		</div>
 		);

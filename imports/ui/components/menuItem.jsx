@@ -27,7 +27,7 @@ export default class MenuItem extends Component {
 
 	render() {
 		return(
-			<li>
+			<li className="o-list-inline__item">
 				{this.renderMenuLinks()}	
 			</li>	
 		);
