@@ -16,8 +16,8 @@ export class Breadcrumb  extends Component {
 						<li className="o-list-inline__item">english</li>
 						<li className="o-list-inline__item">polski</li>
 					</ul>
+				</div>
 			</div>
-		</div>
 		);
 	}
 }

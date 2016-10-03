@@ -6,7 +6,7 @@ import { Breadcrumb } from '../components/breadcrumb.jsx';
 
 export const App = ( { children } ) => (
 	<div className="wrapper">
-		<AccountsUIWrapper />
+		
 		<Breadcrumb />
 		<Navigation />
 		{ children }

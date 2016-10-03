@@ -1,0 +1,12 @@
+@import 'node_modules/inuitcss/settings/_settings.core.scss';
+
+.wrapper {
+    padding: $inuit-global-spacing-unit $inuit-global-spacing-unit 0 $inuit-global-spacing-unit;
+}
+
+#social-media-buttons {
+    i {
+        float: right;
+        padding-left: $inuit-global-spacing-unit/2;
+    }
+}

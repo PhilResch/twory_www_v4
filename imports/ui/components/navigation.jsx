@@ -8,6 +8,7 @@ import React, { Component, PropTypes } from 'react';
 import { PagesCollection } from '../../../lib/pagesCollection.js';
 
 import MenuItem from './menuItem.jsx';
+import AccountsUIWrapper from '../components/accountsUIWrapper.jsx';
 
 export default class Navigation extends Component {
 	getDefaultPages() {
@@ -73,22 +74,23 @@ export default class Navigation extends Component {
 	render() {
 		return (
 			<div id="navbar" className="o-layout">
-				<div id="logo" className="o-layout__item u-1/4">
+				<div id="logo" className="o-layout__item u-3/12">
 					<img src="/img/twory_www_logo_v1.svg" alt="Twory Studio logo"/>
 				</div>
 
-				<div id="mainMenu" className="o-layout__item u-1/4">
+				<div id="mainMenu" className="o-layout__item u-3/12">
 					<ul className="o-list-inline">
+						<AccountsUIWrapper />
 						{this.renderLinks()}
 						
 					</ul>
 				</div>
 
-				<div id="searchBox" className="o-layout__item u-1/4">
+				<div id="searchBox" className="o-layout__item u-3/12">
 					<input type="submit" value="Złóż zamówienie"/>
 				</div>
 
-				<div id="searchBox" className="o-layout__item  u-1/4">
+				<div id="social-media-buttons" className="o-layout__item  u-3/12">
 					<i className="fa fa-facebook-official" aria-hidden="true"></i>
 					<i className="fa fa-twitter-square" aria-hidden="true"></i>
 					<i className="fa fa-pinterest" aria-hidden="true"></i>
