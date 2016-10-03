@@ -1,3 +1,4 @@
+/*
 $inuit-responsive-settings: true;
 $inuit-enable-layout--flush: true;
 $inuit-enable-layout--middle: true;
@@ -18,29 +19,59 @@ $inuit-widths-columns: (
     11,
     12,
 ) !default;
-/*
-@import "node_modules/inuit-defaults/settings.defaults";
-@import "node_modules/inuit-responsive-settings/settings.responsive";
-
-@import "node_modules/inuit-functions/tools.functions";
-@import "node_modules/inuit-mixins/tools.mixins";
-@import "node_modules/inuit-tools-widths/tools.widths";
-@import "node_modules/inuit-responsive-tools/tools.responsive";
-
-@import "node_modules/inuit-normalize/generic.normalize";
-@import "node_modules/inuit-box-sizing/generic.box-sizing";
-
-@import "node_modules/inuit-page/base.page";
-@import "node_modules/inuit-layout/objects.layout";
-@import "node_modules/inuit-media/objects.media";
-
-@import "node_modules/objects.layout-whitespace-fix/objects.layout-whitespace-fix";
-
-@import "node_modules/inuit-pack/objects.pack";
-@import "node_modules/inuit-list-bare/objects.list-bare";
-@import "node_modules/inuit-list-inline/objects.list-inline";
-
-@import "node_modules/inuit-widths/trumps.widths";
-@import "node_modules/inuit-responsive-widths/trumps.widths-responsive";
-@import "node_modules/inuit-clearfix/trumps.clearfix";
 */
+
+// SETTINGS
+@import "node_modules/inuitcss/settings/example.settings.config";
+@import "node_modules/inuitcss/settings/settings.core";
+@import "node_modules/inuitcss/settings/example.settings.global";
+
+// TOOLS
+@import "node_modules/inuitcss/tools/tools.rem";
+@import "node_modules/inuitcss/tools/tools.font-size";
+@import "node_modules/inuitcss/tools/tools.clearfix";
+@import "node_modules/inuitcss/tools/tools.hidden";
+@import "node_modules/sass-mq/mq";
+
+// GENERIC
+@import "node_modules/inuitcss/generic/generic.box-sizing";
+@import "node_modules/inuitcss/generic/generic.normalize";
+@import "node_modules/inuitcss/generic/generic.reset";
+@import "node_modules/inuitcss/generic/generic.shared";
+
+// ELEMENTS
+@import "node_modules/inuitcss/elements/elements.page";
+@import "node_modules/inuitcss/elements/elements.headings";
+@import "node_modules/inuitcss/elements/elements.images";
+@import "node_modules/inuitcss/elements/elements.tables";
+
+// OBJECTS
+//
+// Uncomment and add to this section as necessary.
+@import "node_modules/inuitcss/objects/objects.wrapper";
+@import "node_modules/inuitcss/objects/objects.layout";
+@import "node_modules/inuitcss/objects/objects.media";
+@import "node_modules/inuitcss/objects/objects.flag";
+@import "node_modules/inuitcss/objects/objects.list-bare";
+@import "node_modules/inuitcss/objects/objects.list-inline";
+@import "node_modules/inuitcss/objects/objects.box";
+@import "node_modules/inuitcss/objects/objects.block";
+@import "node_modules/inuitcss/objects/objects.ratio";
+@import "node_modules/inuitcss/objects/objects.crop";
+@import "node_modules/inuitcss/objects/objects.tables";
+@import "node_modules/inuitcss/objects/objects.pack";
+
+// COMPONENTS
+//
+// Build and include your project’s UI Compoments here.
+@import "node_modules/inuitcss/components/example.components.buttons";
+
+// UTILITIES
+@import "node_modules/inuitcss/utilities/utilities.clearfix";
+
+$inuit-offsets: true;
+@import "node_modules/inuitcss/utilities/utilities.widths";
+@import "node_modules/inuitcss/utilities/utilities.headings";
+@import "node_modules/inuitcss/utilities/utilities.spacing";
+@import "node_modules/inuitcss/utilities/utilities.print";
+@import "node_modules/inuitcss/utilities/utilities.hide";
