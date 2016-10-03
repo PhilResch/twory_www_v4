@@ -3,13 +3,17 @@ import React, { Component, PropTypes } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import { browserHistory } from 'react-router';
 import { PostsCollection } from '../../../lib/postsCollection.js';
+import FileUploadForm from './fileUploadForm.jsx';
+import FileUpload from './fileUpload.jsx';
 
-export default class testPostList extends Component {
+export default class TestPostList extends Component {
     render() {
         console.log(this.props);
         return (
             <div className="post">
                 <h2>{this.props.title}</h2>
+                {/*<FileUploadForm />*/}
+                <FileUpload />
             </div>
         )
     }
