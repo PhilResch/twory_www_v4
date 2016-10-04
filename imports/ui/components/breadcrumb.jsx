@@ -9,7 +9,7 @@ export class Breadcrumb  extends Component {
 				<div id="breadcrumb" className="o-layout__item u-1/2">
 					<p >breadcrumb/Fuck/This/Shit/</p>
 				</div>
-				<div id="contactAndLanguage" className="o-layout__item  o-layout--right u-1/2">
+				<div id="contactAndLanguage" className="o-layout__item u-1/2">
 					<ul className="o-list-inline">
 						<li className="o-list-inline__item">tel. 48 601 183 700</li>
 						<li className="o-list-inline__item">info@twory.studio</li>
@@ -17,6 +17,7 @@ export class Breadcrumb  extends Component {
 						<li className="o-list-inline__item">polski</li>
 					</ul>
 				</div>
+				<hr className="o-layout--middle" />
 			</div>
 		);
 	}

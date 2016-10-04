@@ -8,7 +8,6 @@ import React, { Component, PropTypes } from 'react';
 import { PagesCollection } from '../../../lib/pagesCollection.js';
 
 import MenuItem from './menuItem.jsx';
-import AccountsUIWrapper from '../components/accountsUIWrapper.jsx';
 
 export default class Navigation extends Component {
 	getDefaultPages() {
@@ -73,24 +72,22 @@ export default class Navigation extends Component {
 
 	render() {
 		return (
-			<div id="navbar" className="o-layout">
-				<div id="logo" className="o-layout__item u-3/12">
+			<div id="navbar" className="o-layout--middle">
+				<div id="logo" className="o-layout__item u-2/12">
 					<img src="/img/twory_www_logo_v1.svg" alt="Twory Studio logo"/>
 				</div>
 
-				<div id="mainMenu" className="o-layout__item u-3/12">
-					<ul className="o-list-inline">
-						<AccountsUIWrapper />
+				<div id="mainMenu" className="o-layout__item u-5/12">
+					<ul className="o-list-inline o-pack">
 						{this.renderLinks()}
-						
 					</ul>
 				</div>
 
-				<div id="searchBox" className="o-layout__item u-3/12">
+				<div id="orderButton" className="o-layout__item u-4/12">
 					<input type="submit" value="Złóż zamówienie"/>
 				</div>
 
-				<div id="social-media-buttons" className="o-layout__item  u-3/12">
+				<div id="social-media-buttons" className="o-layout__item  u-1/12">
 					<i className="fa fa-facebook-official" aria-hidden="true"></i>
 					<i className="fa fa-twitter-square" aria-hidden="true"></i>
 					<i className="fa fa-pinterest" aria-hidden="true"></i>

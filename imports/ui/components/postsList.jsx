@@ -4,6 +4,7 @@ import { createContainer } from 'meteor/react-meteor-data';
 import { browserHistory } from 'react-router';
 import { PostsCollection } from '../../../lib/postsCollection.js';
 import TestPostList from './testPostList.jsx';
+import AccountsUIWrapper from '../components/accountsUIWrapper.jsx';
 
 export default class PostsList extends Component {
     handleNewPost() {
@@ -78,6 +79,8 @@ export default class PostsList extends Component {
             </div>
             */
             <div>
+                <AccountsUIWrapper />
+                
                 <form id="testForm" onSubmit={this.insertNewPosts}>
                     Title:<br />
                     <input type="text" name="title" defaultValue="Mickey" />

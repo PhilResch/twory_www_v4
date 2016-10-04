@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { render } from 'react-dom';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
-import { Index } from '../../ui/components/index.jsx';
+import Index from '../../ui/components/index.jsx';
 import PostsList from '../../ui/components/postsList.jsx';
 
 import { App } from '../../ui/layouts/app.jsx';

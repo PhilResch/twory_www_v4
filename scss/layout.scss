@@ -1,12 +1,106 @@
 @import 'node_modules/inuitcss/settings/_settings.core.scss';
+@import 'node_modules/inuitcss/tools/_tools.font-size.scss';
 
 .wrapper {
     padding: $inuit-global-spacing-unit $inuit-global-spacing-unit 0 $inuit-global-spacing-unit;
 }
 
-#social-media-buttons {
-    i {
-        float: right;
-        padding-left: $inuit-global-spacing-unit/2;
+
+#topInfoBar {
+    hr {
+        margin-left: $inuit-global-spacing-unit;
+        border-top: 1px solid rgb(200, 200, 200);
+        border-bottom: 0px;
+    }
+
+    #breadcrumb {
+        p {
+            
+            padding-bottom: $inuit-global-spacing-unit/2;
+            margin-top: $inuit-global-spacing-unit/2;
+            margin-bottom: 0px;
+        }
+    }
+    
+    #contactAndLanguage {
+        ul {
+            padding-bottom: $inuit-global-spacing-unit/2;
+            margin-top: $inuit-global-spacing-unit/2;
+            margin-bottom: 0px;
+            text-align: right;
+            
+            li {
+                padding-left: $inuit-global-spacing-unit;
+            }
+        }
     }
 }
+
+
+#navbar {
+
+    #logo {
+        padding-left: 0px;
+    }
+    
+    #mainMenu {
+        a {
+            text-decoration: none;
+            @include inuit-font-size(18px);
+        }
+        
+        ul {
+            margin-bottom: 0px;
+            
+            li {
+                a {
+                    color: black;
+                }
+            }
+        }
+    }
+    
+    #orderButton {
+        text-align:center;
+        
+        input {
+            @include inuit-font-size(18px);
+            background-color:  white;
+            border: solid black 2px;
+            padding-top: 8px;
+            padding-bottom: 8px;
+            padding-left: 12px;
+            padding-right: 12px;
+            margin: auto;
+        }
+    }
+   
+    #social-media-buttons {
+        i {
+            text-align: right;
+            padding-left: $inuit-global-spacing-unit/2;
+            @include inuit-font-size(24px); 
+        }
+    }
+
+}
+
+
+#content {    
+    padding-top: $inuit-global-spacing-unit;
+    width: 100%;
+    
+    h5 {
+        color: rgb(200, 200, 200);
+    }
+    
+    .projectType {
+        color: rgb(200, 200, 200);
+    }
+    
+    .imageLarge {
+        position: relative;
+        max-width: 100%;
+    }
+}
+
