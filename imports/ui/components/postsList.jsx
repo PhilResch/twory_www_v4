@@ -80,20 +80,21 @@ export default class PostsList extends Component {
                 <button type="button" label="Insert Post" onClick={this.insertNewPost} />
             </div>
             */
-            <div>
+            <div className="o-box">
                 <AccountsUIWrapper />
-                <FileUpload /> 
                 
                 <form id="testForm" onSubmit={this.insertNewPosts}>
-                    Title:<br />
+                    Nazwa klienta:<br />
                     <input type="text" name="title" defaultValue="Mickey" />
                     <br />
-                    Content:<br />
+                    Opis projektu:<br />
                     <input type="text" name="content" defaultValue="Mouse" />
                     <br/><br/>
                     <input type="submit" value="Submit"/>
                 </form>
 
+                <FileUpload /> 
+                
                 {this.renderPosts()}       
             </div>
         )

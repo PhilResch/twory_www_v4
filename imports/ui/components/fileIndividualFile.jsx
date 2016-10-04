@@ -43,35 +43,35 @@ const IndividualFile = React.createClass({
 
   render() {
 
-    return <div className="m-t-sm">
-      <div className="row">
-        <div className="col-md-12">
+    return <div className="">
+      <div className="o-layout">
+        <div className="o-layout__item u-12/12">
           <strong>{this.props.fileName}</strong>
           <div className="m-b-sm">
           </div>
         </div>
       </div>
 
-      <div className="row">
-        <div className="col-md-3">
+      <div className="o-layout">
+        <div className="o-layout__item u-3/12">
           <button onClick={this.renameFile} className="btn btn-outline btn-primary btn-sm">
             Rename
           </button>
         </div>
 
 
-        <div className="col-md-3">
+        <div className="o-layout__item u-3/12">
           <a href={this.props.fileUrl} className="btn btn-outline btn-primary btn-sm"
              target="_blank">View</a>
         </div>
 
-        <div className="col-md-2">
+        <div className="o-layout__item u-2/12">
           <button onClick={this.removeFile} className="btn btn-outline btn-danger btn-sm">
             Delete
           </button>
         </div>
 
-        <div className="col-md-4">
+        <div className="o-layout__item u-4/12">
           Size: {this.props.fileSize}
         </div>
       </div>

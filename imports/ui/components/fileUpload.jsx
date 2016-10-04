@@ -6,7 +6,7 @@ import {_} from 'meteor/underscore';
 import { Images } from '../../../lib/imagesCollection.js';
 
 
-const FileUploadComponent = React.createClass({
+export default FileUploadComponent = React.createClass({
   mixins: [ReactMeteorData],
 
   getInitialState(){
@@ -141,23 +141,21 @@ const FileUploadComponent = React.createClass({
       });
 
       return <div>
-        <div className="row">
-          <div className="col-md-12">
+        <div className="o-layout">
+          <div className="o-layout__item u-12/12">
             <p>Upload New File:</p>
             <input type="file" id="fileinput" disabled={this.state.inProgress} ref="fileinput"
                  onChange={this.uploadIt}/>
           </div>
         </div>
 
-        <div className="row m-t-sm m-b-sm">
-          <div className="col-md-6">
+          <div className="o-layout__item u-6/12">
 
             {this.showUploads()}
 
           </div>
-          <div className="col-md-6">
-          </div>
-        </div>
+          <div className="o-layout__item u-6/12">
+         </div>
 
         {showit}
 
@@ -167,4 +165,4 @@ const FileUploadComponent = React.createClass({
   }
 });
 
-export default FileUploadComponent;
+//export default FileUploadComponent;
