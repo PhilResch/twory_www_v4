@@ -1,16 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 
-/*
-//export const Index = () => <h3>Index</h3>;
-export const Index = () => (
-    <h3>A form will appear here shortly</h3>
-)
-*/
-
 export default class Index extends Component {
     render() {
         return(
-            <div id="content">
+            <div>
                 <img src="/img/1.jpg" className="o-media" />
                 <div className="o-box projectDescription">
                     <h1 className="clientName">

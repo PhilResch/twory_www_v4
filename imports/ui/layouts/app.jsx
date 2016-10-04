@@ -6,9 +6,10 @@ import { Breadcrumb } from '../components/breadcrumb.jsx';
 
 export const App = ( { children } ) => (
 	<div className="o-wrapper">
-		
-		<Breadcrumb />
-		<Navigation />
-		{ children }
+			<Breadcrumb />
+			<Navigation />
+		<div id="content">	
+			{ children }
+		</div>
 	</div>
 )

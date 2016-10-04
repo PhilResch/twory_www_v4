@@ -5,6 +5,8 @@ import { browserHistory } from 'react-router';
 import { PostsCollection } from '../../../lib/postsCollection.js';
 import TestPostList from './testPostList.jsx';
 import AccountsUIWrapper from '../components/accountsUIWrapper.jsx';
+import FileIndividualFile from '../components/fileIndividualFile.jsx';
+import FileUpload from '../components/fileUpload.jsx';
 
 export default class PostsList extends Component {
     handleNewPost() {
@@ -80,6 +82,7 @@ export default class PostsList extends Component {
             */
             <div>
                 <AccountsUIWrapper />
+                <FileUpload /> 
                 
                 <form id="testForm" onSubmit={this.insertNewPosts}>
                     Title:<br />
