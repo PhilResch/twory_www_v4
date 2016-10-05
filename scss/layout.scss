@@ -109,7 +109,7 @@
     margin-right: -$inuit-global-spacing-unit/2;
 }
 
-button, #fileinput {
+button {
     @include inuit-font-size(18px);
     background-color:  white;
     border: solid black 2px;
@@ -124,4 +124,8 @@ button, #fileinput {
         background-color:black;
         color: white;
     }
+}
+
+.thumbnail {
+    float: left;
 }
