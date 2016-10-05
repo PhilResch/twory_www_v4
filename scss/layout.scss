@@ -129,3 +129,18 @@ button {
 .thumbnail {
     float: left;
 }
+
+.fileUploadThumbnails {
+    padding-bottom: $inuit-global-spacing-unit;
+}
+
+#fileUploadBox {
+    background-color:  white;
+    border: solid black 2px;
+    padding: $inuit-global-spacing-unit;
+    margin-bottom: $inuit-global-spacing-unit;
+    
+    i {
+        @include inuit-font-size(24px);
+    }
+}

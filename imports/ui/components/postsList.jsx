@@ -63,24 +63,7 @@ export default class PostsList extends Component {
         console.log("PostsList props: ");
         console.log(this.props);
         return (
-             /*
-             <GridRow>
-                <GridColumn className="column">
-                    <SuccessButton type="button" label="New Post" onClick={this.handleNewPost} />
-                    <PageHeader size="h4" label="Posts" />
-                    {this.renderPostsList()}
-                </GridColumn>
-             </GridRow>
-             */
-             /*
-             <div>
-                <h1>WHAT THE FUCK</h1>
-                {this.renderPostsList()}
-                <button type="button" label="New Post" onClick={this.handleNewPost} />
-                <button type="button" label="Insert Post" onClick={this.insertNewPost} />
-            </div>
-            */
-            <div className="o-box">
+            <div className="">
                 <AccountsUIWrapper />
                 
                 <form id="testForm" onSubmit={this.insertNewPosts}>

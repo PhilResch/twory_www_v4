@@ -130,36 +130,41 @@ export default FileUploadComponent = React.createClass({
         let link = Images.findOne({_id: aFile._id}).link();  //The "view/download" link
 
         // Send out components that show details of each file
-        return <div key={'file' + key}>
+        //return <div key={'file' + key}>
+        return (
           <IndividualFile
+            key={'file' + key}
             fileName={aFile.name}
             fileUrl={link}
             fileId={aFile._id}
             fileSize={aFile.size}
           />
-        </div>
+        )
+        //</div>
       });
 
-      return <div>
+      return (
         <div className="o-layout">
           <div className="o-layout__item u-12/12">
-            <p>Upload New File:</p>
-            <input type="file" id="fileinput" disabled={this.state.inProgress} ref="fileinput"
-                 onChange={this.uploadIt}/>
+              <h1>Dodawanie zawartości</h1>
+              <div id="fileUploadBox" className="o-layout__item u-6/12">
+                <div className="o-media">
+                  <i className="fa fa-upload o-media__img" aria-hidden="true"></i>
+                  <div className="o-media__body">
+                    <h4>Dodaj nowy obrazek:</h4>
+                    <input type="file" id="fileinput" disabled={this.state.inProgress} ref="fileinput"
+                        onChange={this.uploadIt}/>
+                  </div>
+                </div>
+              </div>
           </div>
-        </div>
+            {showit}
 
           <div className="o-layout__item u-6/12">
-
-            {this.showUploads()}
-
+                {this.showUploads()}
           </div>
-          <div className="o-layout__item u-6/12">
-         </div>
-
-        {showit}
-
-      </div>
+       </div>
+      )
     }
     else return <div></div>
   }

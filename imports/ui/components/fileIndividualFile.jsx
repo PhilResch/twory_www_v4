@@ -1,5 +1,5 @@
 import React from 'react';
-const IndividualFile = React.createClass({
+export default IndividualFile = React.createClass({
 
   propTypes: {
     fileName: React.PropTypes.string.isRequired,
@@ -42,40 +42,29 @@ const IndividualFile = React.createClass({
   },
 
   render() {
-
-    return <div className="">
-      <div className="o-layout">
-        <div className="o-layout__item u-12/12">
-          <strong>{this.props.fileName}</strong>
-          <div className="m-b-sm">
+    return (
+      <div className="o-layout__item u-6/12">
+        <div className="o-media fileUploadThumbnails">
+          <img className="o-media__img u-2/12" src={this.props.fileUrl} />
+          <div className="o-media__body">
+              <strong className="">{this.props.fileName}</strong>
+              <br />
+                <button onClick={this.renameFile} className="">
+                  Zmień nazwę
+                </button>            
+                
+                <a href={this.props.fileUrl} className="btn btn-outline btn-primary btn-sm"
+                target="_blank">
+                  Podgląd
+                </a>
+                
+                <button onClick={this.removeFile} className="btn btn-outline btn-danger btn-sm">
+                  Usuń
+                </button>
+            
+                Size: {this.props.fileSize}
           </div>
         </div>
-      </div>
-
-      <div className="o-layout">
-        <div className="o-layout__item u-3/12">
-          <button onClick={this.renameFile} className="btn btn-outline btn-primary btn-sm">
-            Rename
-          </button>
-        </div>
-
-
-        <div className="o-layout__item u-3/12">
-          <a href={this.props.fileUrl} className="btn btn-outline btn-primary btn-sm"
-             target="_blank">View</a>
-        </div>
-
-        <div className="o-layout__item u-2/12">
-          <button onClick={this.removeFile} className="btn btn-outline btn-danger btn-sm">
-            Delete
-          </button>
-        </div>
-
-        <div className="o-layout__item u-4/12">
-          Size: {this.props.fileSize}
-        </div>
-      </div>
     </div>
-  }
-});
-export default IndividualFile;
+    )}
+})

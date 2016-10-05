@@ -9,8 +9,6 @@ export default class TestPostList extends Component {
         return (
             <div className="post">
                 <h2>{this.props.title}</h2>
-                {/*<FileUploadForm />*/}
-                <FileUpload />
             </div>
         )
     }
