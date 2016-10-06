@@ -4,7 +4,6 @@ import { createContainer } from 'meteor/react-meteor-data';
 import { browserHistory } from 'react-router';
 import { PostsCollection } from '../../../lib/postsCollection.js';
 import TestPostList from './testPostList.jsx';
-import AccountsUIWrapper from '../components/accountsUIWrapper.jsx';
 import FileIndividualFile from '../components/fileIndividualFile.jsx';
 import FileUpload from '../components/fileUpload.jsx';
 
@@ -72,15 +71,26 @@ export default class PostsList extends Component {
         console.log("PostsList props: ");
         console.log(this.props);
         return (
-            <div className="">
-                <AccountsUIWrapper />
-                
+            <div id="editor">
+{/*
+                <UploadNewImage client={getClientName()} tags={getTags()} />
+                <CreateNewPost />
+*/}
+
+                <FileUpload /> 
+                {/*
+                <UploadNewImage />
+                */}
                 <form id="testForm" onSubmit={this.insertNewPosts}>
-                    Nazwa klienta:<br />
-                    <input type="text" name="title" defaultValue="Jan Kowalski" />
+                    <h1>
+                        <input 
+                            type="text" 
+                            name="title" 
+                            defaultValue="Wprowadź nazwę klienta" />
+                    </h1>
                     <br />
                     Opis projektu:<br />
-                    <textarea rows="20" cols="100" name="content" defaultValue="Eh."></textarea>
+                    <textarea rows="20" name="content" defaultValue="Wprowadź opis projektu."></textarea>
                     <br/>
 {/*                    Tagi:<br />
                     <input type="text" name="tags" defaultValue="Projekt logo" />
@@ -92,7 +102,6 @@ export default class PostsList extends Component {
                     <input type="submit" value="Submit"/>
                 </form>
 
-                <FileUpload /> 
                 
                 {this.renderPosts()}       
             </div>

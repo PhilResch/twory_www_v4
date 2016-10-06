@@ -3,7 +3,7 @@ import React from 'react';
 import {Meteor} from 'meteor/meteor';
 import IndividualFile from './fileIndividualFile.jsx';
 import {_} from 'meteor/underscore';
-import { Images } from '../../../lib/imagesCollection.js';
+import { ImagesCollection } from '../../../lib/imagesCollection.js';
 
 
 export default FileUploadComponent = React.createClass({
@@ -21,7 +21,7 @@ export default FileUploadComponent = React.createClass({
     var handle = Meteor.subscribe('files.images.all');
     return {
       docsReadyYet: handle.ready(),
-      docs: Images.find().fetch() // Collection is Images
+      docs: ImagesCollection.find().fetch() // Collection is Images
     };
   },
 
@@ -37,11 +37,12 @@ export default FileUploadComponent = React.createClass({
       var file = e.currentTarget.files[0];
 
       if (file) {
-        let uploadInstance = Images.insert({
+        let uploadInstance = ImagesCollection.insert({
           file: file,
           meta: {
             locator: self.props.fileLocator,
-            userId: Meteor.userId() // Optional, used to check on server for file tampering
+            userId: Meteor.userId(), // Optional, used to check on server for file tampering
+            Pikaczu: "Please work god damn it"
           },
           streams: 'dynamic',
           chunkSize: 'dynamic',
@@ -127,7 +128,7 @@ export default FileUploadComponent = React.createClass({
       let showit = fileCursors.map((aFile, key) => {
         // console.log('A file: ', aFile.link(), aFile.get('name'));
 
-        let link = Images.findOne({_id: aFile._id}).link();  //The "view/download" link
+        let link = ImagesCollection.findOne({_id: aFile._id}).link();  //The "view/download" link
 
         // Send out components that show details of each file
         //return <div key={'file' + key}>
@@ -146,8 +147,7 @@ export default FileUploadComponent = React.createClass({
       return (
         <div className="o-layout">
           <div className="o-layout__item u-12/12">
-              <h1>Dodawanie zawartości</h1>
-              <div id="fileUploadBox" className="o-layout__item u-6/12">
+              <div id="fileUploadBox" className="o-layout__item u-12/12">
                 <div className="o-media">
                   <i className="fa fa-upload o-media__img" aria-hidden="true"></i>
                   <div className="o-media__body">
