@@ -1,6 +1,6 @@
 import '../lib/pagesCollection.js';
 import '../lib/portfolioCollection.js';
-
+/*
 import { Meteor } from 'meteor/meteor';
 
 WebApp.connectHandlers.use('/file', (req, res) => {
@@ -34,3 +34,7 @@ WebApp.connectHandlers.use('/file', (req, res) => {
         res.end();
     }
 });
+*/
+
+
+
