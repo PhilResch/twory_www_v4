@@ -42,7 +42,7 @@ export default FileUploadComponent = React.createClass({
           meta: {
             locator: self.props.fileLocator,
             userId: Meteor.userId(), // Optional, used to check on server for file tampering
-            Pikaczu: "Please work god damn it"
+//            tags: this.props.tags
           },
           streams: 'dynamic',
           chunkSize: 'dynamic',
@@ -143,7 +143,7 @@ export default FileUploadComponent = React.createClass({
         )
         //</div>
       });
-
+/*
       return (
         <div className="o-layout">
           <div className="o-layout__item u-12/12">
@@ -152,8 +152,14 @@ export default FileUploadComponent = React.createClass({
                   <i className="fa fa-upload o-media__img" aria-hidden="true"></i>
                   <div className="o-media__body">
                     <h4>Dodaj nowy obrazek:</h4>
-                    <input type="file" id="fileinput" disabled={this.state.inProgress} ref="fileinput"
-                        onChange={this.uploadIt}/>
+                    <input 
+                      type="file"
+                      id="fileinput" 
+                      disabled={this.state.inProgress} 
+                      ref="fileinput"
+                      //onChange={this.uploadIt}
+                      onSubmit={this.uploadIt}
+                    />
                   </div>
                 </div>
               </div>
@@ -166,6 +172,18 @@ export default FileUploadComponent = React.createClass({
        </div>
       )
     }
+    else return <div></div>
+  }
+  */
+      return (
+        <input 
+          type="file"
+          id="fileinput" 
+          disabled={this.state.inProgress} 
+          ref="fileinput"
+          onSubmit={this.uploadIt}
+        />
+    )}
     else return <div></div>
   }
 });

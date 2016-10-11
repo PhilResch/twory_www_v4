@@ -86,7 +86,11 @@ export default class UploadNewImage extends Component {
             <div className="uploadImageForm">
                 <div className="o-media__body">
                 <h4>Dodaj nowy obrazek:</h4>
-                <input type="file" id="fileinput" disabled={this.state.inProgress} ref="fileinput"
+                <input 
+                    type="file" 
+                    id="fileinput" 
+                    disabled={this.state.inProgress} 
+                    ref="fileinput"
                     onChange={this.insertImage}/>
                 </div>
             </div>
