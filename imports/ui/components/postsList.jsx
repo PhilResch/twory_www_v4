@@ -8,7 +8,6 @@ import FileIndividualFile from '../components/fileIndividualFile.jsx';
 import FileUpload from '../components/fileUpload.jsx';
 
 //////////////////////////////////////////////////////////
-import {ReactMeteorData} from 'meteor/react-meteor-data';
 import IndividualFile from './fileIndividualFile.jsx';
 import {_} from 'meteor/underscore';
 import { ImagesCollection } from '../../../lib/imagesCollection.js';
@@ -29,18 +28,18 @@ export default class PostsList extends Component {
     getPosts() {
         let posts = [];
         for (let i=0; i < this.props.posts.length; i++) {
+            let imageId = this.props.posts[i].image;
+            let imageLink = ImagesCollection.findOne({_id: imageId}).link();
             posts.push({
                 _id: i,
                 title: this.props.posts[i].label,
                 content: this.props.posts[i].content,
-//              image: this.props.posts[i].image
-// http://localhost:3000/cdn/storage/ImagesCollection/
-// albo
-// http://localhost:3000/cdn/storage/ImagesCollection/jR8hzcw2k3fRLvR48/original/jR8hzcw2k3fRLvR48.jpg
+                image: imageLink
             });
         }
         return posts;
     }
+    
 
     renderPosts() {
         return this.getPosts().map((post) =>(
@@ -51,7 +50,7 @@ export default class PostsList extends Component {
                 image={post.image}/>
         ));
     }
-    
+
     insertNewPosts(event) {
         event.preventDefault();       
         
@@ -87,7 +86,6 @@ export default class PostsList extends Component {
                        image:  imageId,
        //                tags: tags,
                    };
-                   console.log("HERE'S NEWPOST: " + JSON.stringify(newPost));
                    Meteor.call('createNewPost', newPost);
                 });
                 
@@ -97,47 +95,46 @@ export default class PostsList extends Component {
     }
     
     render() {
-        console.log("PostsList props: ");
-        console.log(this.props);
-        
-        console.log("Fetched Images Collection: ");
-        console.log(ImagesCollection.find().fetch());
-
-        return (
-            <div id="editor">
-                <form id="testForm" onSubmit={this.insertNewPosts.bind(this)}>
-                    <h1>
+        if(this.props.docsReadyYet && this.props.postsCollectionIsReady) {
+            return (
+                <div id="editor">
+                    <form id="testForm" onSubmit={this.insertNewPosts.bind(this)}>
+                        <h1>
+                            <input 
+                                type="text" 
+                                name="title" 
+                                defaultValue="Wprowadź nazwę klienta" />
+                        </h1>
+                        <br />
+                        
+                        Opis projektu:<br />
+                        <textarea rows="20" name="content" defaultValue="Wprowadź opis projektu."></textarea>
+                        <br/>
+                        
+                        Tagi:<br />
+                        <input type="text" name="tags" defaultValue="Projekt logo" />
+                        <br /><br />
+                        
+                        Obrazki: <br />
                         <input 
-                            type="text" 
-                            name="title" 
-                            defaultValue="Wprowadź nazwę klienta" />
-                    </h1>
-                    <br />
-                    
-                    Opis projektu:<br />
-                    <textarea rows="20" name="content" defaultValue="Wprowadź opis projektu."></textarea>
-                    <br/>
-                    
-                    Tagi:<br />
-                    <input type="text" name="tags" defaultValue="Projekt logo" />
-                    <br /><br />
-                    
-                    Obrazki: <br />
-                    <input 
-                        type="file"
-                        name="image"
-                        id="fileinput" 
-//                        disabled={this.state.inProgress} 
-                        ref="fileinput"
-                    />
-                    <br /><br />
-                    
-                    <input type="submit" value="Submit"/>
-                </form>
-                <br /><hr /><br />
-                {this.renderPosts()}       
-            </div>
-        )
+                            type="file"
+                            name="image"
+                            id="fileinput" 
+    //                        disabled={this.state.inProgress} 
+                            ref="fileinput"
+                        />
+                        <br /><br />
+                        
+                        <input type="submit" value="Submit"/>
+                    </form>
+                    <br /><hr /><br />
+                        {this.renderPosts()}
+                </div>
+            )
+        }
+        else {
+            return <div>Loading</div>;
+        }
     }
 }
 
@@ -147,6 +144,7 @@ export default createContainer(() => {
     return { 
         docsReadyYet: imagesCollectionSubscription.ready(),
         docs: ImagesCollection.find().fetch(),
+        postsCollectionIsReady: postsCollectionSubscription.ready(),
         
         posts: PostsCollection.find().fetch().map((post) => {
             return {
