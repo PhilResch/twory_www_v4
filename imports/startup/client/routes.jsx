@@ -3,7 +3,9 @@ import { render } from 'react-dom';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
 import Index from '../../ui/components/index.jsx';
+import Editor from '../../ui/components/editor.jsx';
 import PostsList from '../../ui/components/postsList.jsx';
+import Admin from '../../ui/components/admin.jsx';
 
 import { App } from '../../ui/layouts/app.jsx';
 import Portfolio from '../../ui/pages/portfolio.jsx';
@@ -13,6 +15,7 @@ import { Contact } from '../../ui/pages/contact.jsx';
 import { NotFound } from '../../ui/pages/notFound.jsx';
 
 
+
 Meteor.startup( () => {
 	render(
 		<Router history={ browserHistory }>
@@ -20,8 +23,8 @@ Meteor.startup( () => {
 				<IndexRoute component={ Index } />
 				<Route path="/portfolio" component={ Portfolio } />
 				<Route path="/studio" component={ Studio } />
-				<Route path="/blog" component={ Blog } />
-				<Route path="/contact" component={ Contact } />
+				<Route path="/admin" component={ Admin } />
+				<Route path="/editor" component={ Editor } />
 				<Route path="/postsList" component={ PostsList } />
 				<Route path="*" component={ NotFound } />
 			</Route>

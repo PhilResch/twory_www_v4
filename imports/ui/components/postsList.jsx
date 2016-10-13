@@ -15,16 +15,6 @@ import { ImagesCollection } from '../../../lib/imagesCollection.js';
 
 export default class PostsList extends Component {
 
-    constructor(props){
-        super(props)
-       
-        this.state = {
-            uploading: [],
-            progress: 0,
-            inProgress: false
-        }
-    }
-
     getPosts() {
         let posts = [];
         for (let i=0; i < this.props.posts.length; i++) {
@@ -51,89 +41,16 @@ export default class PostsList extends Component {
         ));
     }
 
-    insertNewPosts(event) {
-        event.preventDefault();       
-        
-        let title = event.target.title.value;
-        let content = event.target.content.value;
-        let imageId = "";
-        let tags = event.target.tags.value;    
-        
-        if (event.target.image.files && event.target.image.files[0]) {
-            var file = event.target.image.files[0];
-
-            if (file) {
-                let image = {
-                    file: file,
-                    meta: {
-                        associatedArticleTitle: title,
-                        tags: tags,
-                        userId: Meteor.userId(), // Optional, used to check on server for file tampering
-                    //     locator: this.props.fileLocator,
-                    },
-                    streams: 'dynamic',
-                    chunkSize: 'dynamic',
-                    allowWebWorkers: true // If you see issues with uploads, change this to false
-                }
-                
-                let uploadInstance = ImagesCollection.insert(image, false);
-                
-                uploadInstance.on('uploaded', function (error, fileRef) {
-                   imageId = fileRef._id; 
-                   let newPost = {
-                       title: title,
-                       content: content,
-                       image:  imageId,
-       //                tags: tags,
-                   };
-                   Meteor.call('createNewPost', newPost);
-                });
-                
-                uploadInstance.start();
-            }
-        }
-    }
-    
     render() {
         if(this.props.docsReadyYet && this.props.postsCollectionIsReady) {
             return (
-                <div id="editor">
-                    <form id="testForm" onSubmit={this.insertNewPosts.bind(this)}>
-                        <h1>
-                            <input 
-                                type="text" 
-                                name="title" 
-                                defaultValue="Wprowadź nazwę klienta" />
-                        </h1>
-                        <br />
-                        
-                        Opis projektu:<br />
-                        <textarea rows="20" name="content" defaultValue="Wprowadź opis projektu."></textarea>
-                        <br/>
-                        
-                        Tagi:<br />
-                        <input type="text" name="tags" defaultValue="Projekt logo" />
-                        <br /><br />
-                        
-                        Obrazki: <br />
-                        <input 
-                            type="file"
-                            name="image"
-                            id="fileinput" 
-    //                        disabled={this.state.inProgress} 
-                            ref="fileinput"
-                        />
-                        <br /><br />
-                        
-                        <input type="submit" value="Submit"/>
-                    </form>
-                    <br /><hr /><br />
-                        {this.renderPosts()}
+                <div>
+                    {this.renderPosts()}
                 </div>
             )
         }
         else {
-            return <div>Loading</div>;
+            return <div>Loading list of posts</div>;
         }
     }
 }

@@ -26,12 +26,12 @@ export default class Navigation extends Component {
 					component: "studio.jsx"	
 				},
 				{
-					title: "Blog",
-					component: "blog.jsx"	
+					title: "Admin",
+					component: "admin.jsx"	
 				},	
 				{
-					title: "Contact",
-					component: "contact.jsx"	
+					title: "Editor",
+					component: "editor.jsx"	
 				},					
 				{
 					title: "PostsList",
