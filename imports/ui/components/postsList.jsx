@@ -24,6 +24,7 @@ export default class PostsList extends Component {
                 _id: i,
                 title: this.props.posts[i].label,
                 content: this.props.posts[i].content,
+                tags: this.props.posts[i].tags,
                 image: imageLink
             });
         }
@@ -37,6 +38,7 @@ export default class PostsList extends Component {
                 key={post._id} 
                 title={post.title} 
                 content={post.content} 
+                tags={post.tags}
                 image={post.image}/>
         ));
     }

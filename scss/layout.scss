@@ -166,14 +166,29 @@ button {
 .portfolioItem {
     position: relative;
     
-    .portfolioItemThumbnail {
-    }
-    
     .portfolioItemDescription {
-        position: absolute;
+        height: 100%;
+        color: white;
         
-        .clientName, .tag {
-            color: white;
+        .viewMorePrompt {
+            transition: 1s;
+            opacity: 0;
+        }
+
+        &:hover {
+            transition: 1s;
+            background-color: rgba(0,0,0,0.5);
+            
+            .viewMorePrompt {
+                transition: 1;
+                opacity: 1;
+            }
         }
     }
+    
+    .portfolioItemThumbnail {
+        background-size: cover;
+        background-position: center;
+    }
 }
+
