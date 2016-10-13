@@ -7,7 +7,6 @@ import React, { Component, PropTypes } from 'react';
 //import { PagesCollection } from '../../api/pagesCollection.js';
 import { PagesCollection } from '../../../lib/pagesCollection.js';
 
-import AccountsUIWrapper from '../components/accountsUIWrapper.jsx';
 import MenuItem from './menuItem.jsx';
 
 export default class Navigation extends Component {
@@ -86,7 +85,6 @@ export default class Navigation extends Component {
 
 				<div id="orderButton" className="o-layout__item u-4/12">
 					<input type="submit" value="Złóż zamówienie"/>
-					<AccountsUIWrapper />
 				</div>
 
 				<div id="social-media-buttons" className="o-layout__item  u-1/12">

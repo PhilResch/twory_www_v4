@@ -2,22 +2,16 @@ import { Meteor } from 'meteor/meteor';
 import React, { Component, PropTypes } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import { browserHistory } from 'react-router';
-import { PostsCollection } from '../../../lib/postsCollection.js';
 export default class PostsListItem extends Component {
     render() {
-/*    
-        console.log("PostsListItem props:")
-        console.log(this.props);
-        console.log("---")
-*/
         return (
-            <div id="content">
-                <img className="o-media" src={this.props.image} />
-                <div className="o-box projectDescription">
-                    <h1 className="clientName">{this.props.title}</h1>
-                    <p className="">{this.props.content}</p>
+                <div className="o-box--small thumbnail portfolioItem u-1/2">
+                    <div className="o-box portfolioItemDescription">
+                        <h3 className="clientName">{this.props.title}</h3>
+                        <p className="tag">{this.props.content}</p>
+                    </div>
+                    <img className="o-media portfolioItemThumbnail" src={this.props.image} />
                 </div>
-            </div>
         )
     }
 }
