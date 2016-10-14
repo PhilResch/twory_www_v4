@@ -200,7 +200,7 @@ button {
             transition: opacity 0.5s, transform 0.5s;
             opacity: 0;
             transform: translate(-50%,30%);
-            font-size: $inuit-global-font-size*2;
+            @include inuit-font-size(36px);
             position: absolute;
             color: white;
             top: 50%;

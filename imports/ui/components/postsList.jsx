@@ -46,7 +46,7 @@ export default class PostsList extends Component {
     render() {
         if(this.props.docsReadyYet && this.props.postsCollectionIsReady) {
             return (
-                <div>
+                <div className="o-box-negative-margin">
                     {this.renderPosts()}
                 </div>
             )
