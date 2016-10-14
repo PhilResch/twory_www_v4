@@ -83,11 +83,11 @@ export default class Navigation extends Component {
 					</ul>
 				</div>
 
-				<div id="orderButton" className="o-layout__item u-4/12">
+				<div id="orderButton" className="o-layout__item u-3/12">
 					<input type="submit" value="Złóż zamówienie"/>
 				</div>
 
-				<div id="social-media-buttons" className="o-layout__item  u-1/12">
+				<div id="social-media-buttons" className="o-layout__item  u-2/12">
 					<i className="fa fa-facebook-official" aria-hidden="true"></i>
 					<i className="fa fa-twitter-square" aria-hidden="true"></i>
 					<i className="fa fa-pinterest" aria-hidden="true"></i>

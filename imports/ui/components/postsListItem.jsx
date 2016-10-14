@@ -5,15 +5,13 @@ import { browserHistory } from 'react-router';
 export default class PostsListItem extends Component {
     render() {
         return (
+        /*
                 <div className="o-box--small thumbnail portfolioItem u-1/2">
                     <div className="tempWrapper">
                         
                         <div className="o-media portfolioItemThumbnail" style= {
                             {backgroundImage: 'url(' + this.props.image + ')'}
                         }>
-{/* 
-                        <img className="o-media portfolioItemThumbnail" src={this.props.image} />
-*/}
                             <div className="o-box portfolioItemDescription">
                                 <h3 className="clientName">{this.props.title}</h3>
                                 <div className="hiddenDescription">
@@ -29,6 +27,29 @@ export default class PostsListItem extends Component {
                         </div>
                     </div>
                 </div>
+                
+*/
+
+        <div className="portfolioItem o-box--tiny u-1/2 thumbnail">
+            <div className="portfolioBox u-1/1">
+                    <div className="portfolioInfo">
+                        <h4>{this.props.title}</h4>
+                        <p className="tag">{this.props.tags}</p>
+                    </div>
+                    <div className="portfolioView">
+                        <p className="">
+                            Zobacz więcej 
+                        </p>
+                    </div>
+                <div 
+                    className="o-ratio o-ratio--16:9 portfolioImage"
+                    style= {{backgroundImage: 'url(' + this.props.image + ')'}}
+                >
+
+                </div>
+            </div>
+        </div>
+                
         )
     }
 }
