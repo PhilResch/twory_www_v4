@@ -78,7 +78,7 @@ export default class Navigation extends Component {
 				</div>
 
 				<div id="mainMenu" className="o-layout__item u-5/12">
-					<ul className="o-list-inline o-pack">
+					<ul className="o-list-inline o-pack o-pack--auto">
 						{this.renderLinks()}
 					</ul>
 				</div>
