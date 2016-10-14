@@ -62,36 +62,62 @@ export default class Editor extends Component {
         if(this.props.docsReadyYet && this.props.postsCollectionIsReady) {
             return (
                 <div id="editor">
+                    <div className="o-box--small">
+                        <h2>Dodawanie artykułów</h2>
+                    </div>
                     <form id="testForm" onSubmit={this.insertNewPosts.bind(this)}>
-                        <h1>
+                        <div className="o-box--small o-layout__item u-1/2">
+                            <div className="formFieldTitle">
+                                Tytuł artykułu lub nazwa klienta
+                            </div>
                             <input 
                                 type="text" 
                                 name="title" 
-                                defaultValue="Wprowadź nazwę klienta" />
-                        </h1>
-                        <br />
+                                placeholder="Wprowadź tytuł" 
+                            />
+                        </div> 
                         
-                        Opis projektu:<br />
-                        <textarea rows="20" name="content" defaultValue="Wprowadź opis projektu."></textarea>
-                        <br/>
+                        <div className="o-box--small o-layout__item u-1/1">
+                            <div className="formFieldTitle">
+                                Opis projektu:<br />
+                            </div>
+                            <textarea 
+                                rows="20" 
+                                name="content" 
+                                placeholder="Wprowadź opis projektu.">
+                            </textarea>
+                        </div>
+
+                        <div className="o-box--small o-layout__item u-1/2"> 
+                            <div className="formFieldTitle">
+                                Tagi:<br />
+                            </div>
+                            <input type="text" name="tags" placeholder="np. Logo" />
+                        </div>
                         
-                        Tagi:<br />
-                        <input type="text" name="tags" defaultValue="Projekt logo" />
-                        <br /><br />
+                        <div className="u-1/1"> 
+                            <div className="o-box--small o-layout__item u-1/2">
+                                <div className="formFieldTitle">
+                                    Obrazki:
+                                </div>
+                                <input 
+                                    type="file"
+                                    name="image"
+                                    id="fileinput" 
+            //                        disabled={this.state.inProgress} 
+                                    ref="fileinput"
+                                />
+                            </div>
+                        </div>
                         
-                        Obrazki: <br />
-                        <input 
-                            type="file"
-                            name="image"
-                            id="fileinput" 
-    //                        disabled={this.state.inProgress} 
-                            ref="fileinput"
-                        />
-                        <br /><br />
-                        
-                        <input type="submit" value="Submit"/>
+                        <div className="o-box--small o-layout__item u-1/1" >
+                            <input 
+                            id="submitButton" 
+                            type="submit" 
+                            value="Dodaj artykuł"
+                            />
+                        </div>
                     </form>
-                    <br /><hr /><br />
                 </div>
             )
         }
