@@ -22,6 +22,7 @@ export default class Editor extends Component {
         let content = event.target.content.value;
         let imageId = "";
         let tags = event.target.tags.value;    
+        let slug = getSlug(title);
         
         if (event.target.image.files && event.target.image.files[0]) {
             var file = event.target.image.files[0];
@@ -44,11 +45,12 @@ export default class Editor extends Component {
                 
                 uploadInstance.on('uploaded', function (error, fileRef) {
                    imageId = fileRef._id; 
-                   let newPost = {
-                       title: title,
-                       content: content,
-                       image:  imageId,
+                    let newPost = {
+                        title: title,
+                        content: content,
+                        image:  imageId,
        //                tags: tags,
+                        slug: slug
                    };
                    Meteor.call('createNewPost', newPost);
                 });

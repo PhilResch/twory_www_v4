@@ -25,7 +25,8 @@ export default class PostsList extends Component {
                 title: this.props.posts[i].label,
                 content: this.props.posts[i].content,
                 tags: this.props.posts[i].tags,
-                image: imageLink
+                image: imageLink,
+                slug: this.props.posts[i].slug
             });
         }
         return posts;
@@ -39,11 +40,15 @@ export default class PostsList extends Component {
                 title={post.title} 
                 content={post.content} 
                 tags={post.tags}
-                image={post.image}/>
+                image={post.image}
+                slug={post.slug}
+                parentPathname = {this.props.location.pathname}
+                />
         ));
     }
 
     render() {
+        console.log(this.props);
         if(this.props.docsReadyYet && this.props.postsCollectionIsReady) {
             return (
                 <div className="o-box-negative-margin">
@@ -72,7 +77,8 @@ export default createContainer(() => {
                 label: post.title,
                 content: post.content,
                 tags: post.tags,
-                image: post.image
+                image: post.image,
+                slug: post.slug
             };
         })
     };
