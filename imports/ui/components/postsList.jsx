@@ -73,7 +73,7 @@ export default createContainer(() => {
         posts: PostsCollection.find().fetch().map((post) => {
             return {
                 uid: post._id,
-                href: '/posts/${post._id}/edit',
+                href: `/posts/${post._id}/edit`,
                 label: post.title,
                 content: post.content,
                 tags: post.tags,
