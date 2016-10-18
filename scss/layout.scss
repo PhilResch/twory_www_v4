@@ -2,14 +2,12 @@
 @import 'node_modules/inuitcss/tools/_tools.font-size.scss';
 @import 'node_modules/inuitcss/tools/_tools.clearfix.scss';
 
-$inuit-fractions: 1 2 3 4 5 6 7 8 9 10 11 12!default;
+$inuit-wrapper-width: 1920px;
+@import 'node_modules/inuitcss/objects/_objects.wrapper.scss';
+
+$inuit-fractions: 1 2 3 4 5 6 7 8 9 10 11 12;
 @import 'node_modules/inuitcss/utilities/_utilities.widths.scss';
 
-
-@import 'node_modules/inuitcss/objects/_objects.wrapper.scss';
-
-$inuit-wrapper-width: 1920px !default;
-@import 'node_modules/inuitcss/objects/_objects.wrapper.scss';
 
 .wrapper {
     padding: $inuit-global-spacing-unit $inuit-global-spacing-unit 0 $inuit-global-spacing-unit;
@@ -25,7 +23,6 @@ $inuit-wrapper-width: 1920px !default;
 
     #breadcrumb {
         p {
-            
             padding-bottom: $inuit-global-spacing-unit/2;
             margin-top: $inuit-global-spacing-unit/2;
             margin-bottom: 0px;
