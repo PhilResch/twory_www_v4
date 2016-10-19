@@ -4,7 +4,6 @@ import { createContainer } from 'meteor/react-meteor-data';
 import { render } from 'react-dom';
 import React, { Component, PropTypes } from 'react';
 
-//import { PagesCollection } from '../../api/pagesCollection.js';
 import { PagesCollection } from '../../../lib/pagesCollection.js';
 
 import MenuItem from './menuItem.jsx';
@@ -102,7 +101,7 @@ export default createContainer(() => {
   pagesCollectionSubscription = Meteor.subscribe('pagesCollection');
   loading = !pagesCollectionSubscription.ready();
   pagesCollectionExists = !loading;
-  console.log("Is the pagesCollection loading? :" + loading);
+  //console.log("Is the pagesCollection loading? :" + loading);
   return {
 	pagesCollectionIsReady: pagesCollectionSubscription.ready() ? true : false,
     pagesCollection: pagesCollectionExists ? PagesCollection.find({}).fetch() : [],

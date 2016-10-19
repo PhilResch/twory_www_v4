@@ -4,8 +4,6 @@ import { createContainer } from 'meteor/react-meteor-data';
 import { browserHistory } from 'react-router';
 import { PostsCollection } from '../../../lib/postsCollection.js';
 import PostsListItem from './postsListItem.jsx';
-import FileIndividualFile from '../components/fileIndividualFile.jsx';
-import FileUpload from '../components/fileUpload.jsx';
 
 //////////////////////////////////////////////////////////
 import IndividualFile from './fileIndividualFile.jsx';
