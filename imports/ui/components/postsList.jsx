@@ -11,6 +11,8 @@ import {_} from 'meteor/underscore';
 import { ImagesCollection } from '../../../lib/imagesCollection.js';
 //////////////////////////////////////////////////////////
 
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+
 export default class PostsList extends Component {
 
     getPosts() {
@@ -50,7 +52,15 @@ export default class PostsList extends Component {
         if(this.props.docsReadyYet && this.props.postsCollectionIsReady) {
             return (
                 <div className="o-box-negative-margin">
-                    {this.renderPosts()}
+                    <ReactCSSTransitionGroup
+                        transitionName="posts-list"
+                        transitionAppear={true} 
+                        transitionAppearTimeout={500} 
+                        transitionEnterTimeout={1000}
+                        transitionLeaveTimeout={500}
+                    > 
+                        {this.renderPosts()}
+                    </ReactCSSTransitionGroup>
                 </div>
             )
         }

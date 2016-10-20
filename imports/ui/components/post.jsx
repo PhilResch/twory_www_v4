@@ -1,9 +1,11 @@
 import { Meteor } from 'meteor/meteor';
 import { render } from 'react-dom';
 import React, { Component, PropTypes } from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { createContainer } from 'meteor/react-meteor-data';
 import { PostsCollection } from '../../../lib/postsCollection.js';
 import { ImagesCollection } from '../../../lib/imagesCollection.js';
+
 
 export default class Post extends Component {
 
@@ -23,24 +25,34 @@ export default class Post extends Component {
 			let tags = post.tags;
 
 			return ( 
-				<div className="u-1/1">
-						<div 
-                            className="o-ratio o-ratio--16:9 portfolioImage"
-                            style= {{backgroundImage: 'url(' + imageLink + ')'}}
-                        >
-                        </div>	
-                        <div className="o-box">
-							<h1 className="clientName">
-								{title}
-							</h1>
-							<p className="projectType">
-								{tags}
-							</p>
-							<p className="paragraphCenter">
-								{content}					
-							</p>
-						</div>
-				</div>
+				<ReactCSSTransitionGroup
+					transitionName="posts-list"
+					transitionAppear={true} 
+					transitionAppearTimeout={500} 
+					transitionEnterTimeout={1000}
+					transitionLeaveTimeout={500}
+				>
+				
+					<div className="u-1/1">
+							<div 
+								className="o-ratio o-ratio--16:9 portfolioImage"
+								style= {{backgroundImage: 'url(' + imageLink + ')'}}
+							>
+							</div>	
+							<div className="o-box">
+								<h1 className="clientName">
+									{title}
+								</h1>
+								<p className="projectType">
+									{tags}
+								</p>
+								<p className="paragraphCenter">
+									{content}					
+								</p>
+							</div>
+					</div>
+					
+				</ReactCSSTransitionGroup>
 			);
 		}
 		else {
