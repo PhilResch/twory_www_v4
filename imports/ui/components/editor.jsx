@@ -3,9 +3,8 @@ import React, { Component, PropTypes } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import { browserHistory } from 'react-router';
 import { PostsCollection } from '../../../lib/postsCollection.js';
-import PostsListItem from './postsListItem.jsx';
-import FileIndividualFile from '../components/fileIndividualFile.jsx';
-import FileUpload from '../components/fileUpload.jsx';
+
+import FormField from '../components/formField.jsx';
 
 //////////////////////////////////////////////////////////
 import IndividualFile from './fileIndividualFile.jsx';
@@ -114,11 +113,19 @@ export default class Editor extends Component {
                         
                         <div className="o-box--small o-layout__item u-1/1" >
                             <input 
-                            id="submitButton" 
-                            type="submit" 
-                            value="Dodaj artykuł"
+                                id="submitButton" 
+                                type="submit" 
+                                value="Dodaj artykuł"
                             />
                         </div>
+                        
+                        <FormField 
+                            title="Testujemy FormField" 
+                            type="textarea" 
+                            name="Testujemy" 
+                            placeholder="Test placeholder" 
+                        />
+
                     </form>
                 </div>
             )
