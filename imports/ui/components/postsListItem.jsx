@@ -11,6 +11,7 @@ export default class PostsListItem extends Component {
     
     render() {
         return (
+            <div className="portfolioItem o-box--small thumbnail u-1/3@wide u-1/2@desktop u-1/1@mobile">
                 <Link to={this.getLink()}>
                     <div className="portfolioBox u-1/1">
                             <div className="portfolioInfo">
