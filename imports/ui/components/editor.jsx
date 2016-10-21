@@ -62,70 +62,48 @@ export default class Editor extends Component {
     render() {
         if(this.props.docsReadyYet && this.props.postsCollectionIsReady) {
             return (
-                <div id="editor">
-                    <div className="o-box--small">
+                <div id="editor" className="u-1/2">
+                    <div className="o-box--small ">
                         <h2>Dodawanie artykułów</h2>
                     </div>
-                    <form id="testForm" onSubmit={this.insertNewPosts.bind(this)}>
-                        <div className="o-box--small o-layout__item u-1/2">
-                            <div className="formFieldTitle">
-                                Tytuł artykułu lub nazwa klienta
-                            </div>
-                            <input 
-                                type="text" 
-                                name="title" 
-                                placeholder="Wprowadź tytuł" 
-                            />
-                        </div> 
-                        
-                        <div className="o-box--small o-layout__item u-1/1">
-                            <div className="formFieldTitle">
-                                Opis projektu:<br />
-                            </div>
-                            <textarea 
-                                rows="20" 
-                                name="content" 
-                                placeholder="Wprowadź opis projektu.">
-                            </textarea>
-                        </div>
 
-                        <div className="o-box--small o-layout__item u-1/2"> 
-                            <div className="formFieldTitle">
-                                Tagi:<br />
-                            </div>
-                            <input type="text" name="tags" placeholder="np. Logo" />
-                        </div>
-                        
-                        <div className="u-1/1"> 
-                            <div className="o-box--small o-layout__item u-1/2">
-                                <div className="formFieldTitle">
-                                    Obrazki:
-                                </div>
-                                <input 
-                                    type="file"
-                                    name="image"
-                                    id="fileinput" 
-            //                        disabled={this.state.inProgress} 
-                                    ref="fileinput"
-                                />
-                            </div>
-                        </div>
-                        
-                        <div className="o-box--small o-layout__item u-1/1" >
-                            <input 
-                                id="submitButton" 
-                                type="submit" 
-                                value="Dodaj artykuł"
-                            />
-                        </div>
+                    <form id="testForm" onSubmit={this.insertNewPosts.bind(this)}>
+                        <FormField 
+                            title="Tytuł artykułu lub nazwa klienta" 
+                            type="text" 
+                            name="title" 
+                            placeholder="Wprowadź tytuł" 
+                        />
                         
                         <FormField 
-                            title="Testujemy FormField" 
+                            title="Tagi" 
+                            type="text" 
+                            name="tags" 
+                            placeholder="np. Logo" 
+                        /> 
+                        
+                        <FormField 
+                            title="Treść" 
                             type="textarea" 
-                            name="Testujemy" 
-                            placeholder="Test placeholder" 
+                            rows="20"
+                            name="content" 
+                            placeholder="Wprowadź treść" 
                         />
-
+                        
+                       <FormField 
+                            title="Obrazki" 
+                            id="fileinput"
+                            type="file" 
+                            name="image" 
+                            placeholder="Wprowadź tytuł" 
+                        /> 
+                        
+                        <FormField
+                            id="submitButton"
+                            type="submit"
+                            value="Dodaj artykuł"
+                        />
+                        
                     </form>
                 </div>
             )

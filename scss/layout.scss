@@ -159,6 +159,8 @@ button {
 }
 
 #editor {
+    margin: auto;
+    
     textarea, input {
         opacity: 0.5;
         transition: opacity 1s;
@@ -169,7 +171,7 @@ button {
         border-radius: 5px; 
         outline: 0;
 
-        &:hover {
+        &:hover, &:focus {
             opacity: 1;
             transition: opacity 1s;
         }
@@ -196,6 +198,10 @@ button {
         
         input {
             text-transform: capitalize;
+        }
+        
+        textarea {
+            resize: vertical;
         }
     }
 

@@ -5,8 +5,44 @@ import { createContainer } from 'meteor/react-meteor-data';
 
 export default class FormField extends Component {
 
+    renderAppropiateInputType() {
+        if (this.props.type === "textarea") {
+            return this.getTextarea();
+        }
+        else { 
+            return this.getInputField();
+        }
+    }
+    
+    getTextarea() {
+        return (
+            <textarea 
+                rows={this.props.rows} 
+                id={this.props.id}
+                ref={this.props.ref}
+                name={this.props.name}
+                placeholder={this.props.placeholder}
+                disabled={this.props.disabled}
+            />
+        )
+    }
+    
+    getInputField() {
+        return (
+            <input 
+                type={this.props.type}
+                id={this.props.id}
+                ref={this.props.id}
+                name={this.props.name} 
+                placeholder={this.props.placeholder}
+                value={this.props.value}
+                disabled={this.props.disabled}
+            />
+        )
+    }
+
     render() {
-        console.log("---|||---|||---|||---");
+        console.log("┻━┻︵ \\(°□°)/ ︵ ┻━┻");
         console.log("FormField component props: ");
         console.log(this.props); 
         
@@ -15,14 +51,7 @@ export default class FormField extends Component {
                 <div className="formFieldTitle">
                     {this.props.title}
                 </div>
-                <input 
-                    id={this.props.id}
-                    ref={this.props.id}
-                    type={this.props.type}
-                    name={this.props.name} 
-                    placeholder={this.props.placeholder}
-                    value={this.props.value}
-                />
+                {this.renderAppropiateInputType()}
             </div> 
         );
     }
