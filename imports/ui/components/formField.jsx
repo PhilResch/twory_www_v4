@@ -42,10 +42,6 @@ export default class FormField extends Component {
     }
 
     render() {
-        console.log("┻━┻︵ \\(°□°)/ ︵ ┻━┻");
-        console.log("FormField component props: ");
-        console.log(this.props); 
-        
         return (
             <div className="o-box--small o-layout__item">
                 <div className="formFieldTitle">
@@ -55,5 +51,4 @@ export default class FormField extends Component {
             </div> 
         );
     }
-
 }

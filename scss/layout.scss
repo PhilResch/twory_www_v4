@@ -104,10 +104,6 @@ $inuit-wrapper-width: 1920px;
 #content {    
     width: 100%;
     
-    .tags {
-        color: rgb(200, 200, 200);
-    }
-    
     .imageLarge {
         position: relative;
         max-width: 100%;
@@ -219,10 +215,17 @@ button {
             transition: 1s;
             background-color: rgba(0,0,0,0.5);
             
-            .portfolioView {
+            .portfolioView, {
                 transition: opacity 0.5s, transform 0.25s;
                 opacity:1;
                 transform: translate(-50%,-30%);
+            }
+            
+            .tags {
+                transition-delay: 0.1s;
+                transition: opacity 2s transform 1s;
+                transform: translate(0%,0%);
+                opacity:1;
             }
             
             .portfolioImage {
@@ -256,6 +259,13 @@ button {
             transition: transform 5s;
             background-position: center;
             z-index:-1;
+        }
+         
+        .tags {
+            margin:0;
+            transition: opacity 0.5s, transform 0.5s;
+            transform: translate(-50%,0%);
+            opacity: 0;
         }
     }
 }

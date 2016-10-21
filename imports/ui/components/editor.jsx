@@ -13,14 +13,17 @@ import { ImagesCollection } from '../../../lib/imagesCollection.js';
 //////////////////////////////////////////////////////////
 
 export default class Editor extends Component {
-
+    convertStringToArray(stringToConvert, delimeter) {
+       return stringToConvert.split(delimeter);
+    }
+    
     insertNewPosts(event) {
         event.preventDefault();       
         
         let title = event.target.title.value;
         let content = event.target.content.value;
         let imageId = "";
-        let tags = event.target.tags.value;    
+        let tags = this.convertStringToArray(event.target.tags.value, ",");
         let slug = getSlug(title);
         
         if (event.target.image.files && event.target.image.files[0]) {
@@ -48,7 +51,7 @@ export default class Editor extends Component {
                         title: title,
                         content: content,
                         image:  imageId,
-       //                tags: tags,
+                        tags: tags,
                         slug: slug
                    };
                    Meteor.call('createNewPost', newPost);
@@ -95,7 +98,6 @@ export default class Editor extends Component {
                             id="fileinput"
                             type="file" 
                             name="image" 
-                            placeholder="Wprowadź tytuł" 
                         /> 
                         
                         <FormField
