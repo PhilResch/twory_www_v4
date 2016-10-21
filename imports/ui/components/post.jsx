@@ -33,9 +33,9 @@ export default class Post extends Component {
 					transitionLeaveTimeout={500}
 				>
 				
-					<div className="u-1/1">
+					<div id="post-content" className="u-1/1">
 							<div 
-								className="o-ratio o-ratio--16:9 portfolioImage"
+								className="o-ratio o-ratio--16:9 postMainImage"
 								style= {{backgroundImage: 'url(' + imageLink + ')'}}
 							>
 							</div>	

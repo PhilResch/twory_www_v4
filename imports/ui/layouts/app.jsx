@@ -8,7 +8,9 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 export const App = ( { children } ) => (
 	<div className="o-wrapper">
-				<Breadcrumb />
+{/*
+				<Breadcrumb /> 
+*/}
 				<Navigation />
 		<div id="content">	
 			{ children }
