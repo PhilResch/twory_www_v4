@@ -3,7 +3,7 @@ import React from 'react';
 import {Meteor} from 'meteor/meteor';
 import IndividualFile from './fileIndividualFile.jsx';
 import {_} from 'meteor/underscore';
-import { Images } from '../../../lib/imagesCollection.js';
+import { ImagesCollection } from '../../../lib/imagesCollection.js';
 
 
 export default FileUploadComponent = React.createClass({
@@ -21,7 +21,7 @@ export default FileUploadComponent = React.createClass({
     var handle = Meteor.subscribe('files.images.all');
     return {
       docsReadyYet: handle.ready(),
-      docs: Images.find().fetch() // Collection is Images
+      docs: ImagesCollection.find().fetch() // Collection is Images
     };
   },
 
@@ -37,11 +37,12 @@ export default FileUploadComponent = React.createClass({
       var file = e.currentTarget.files[0];
 
       if (file) {
-        let uploadInstance = Images.insert({
+        let uploadInstance = ImagesCollection.insert({
           file: file,
           meta: {
             locator: self.props.fileLocator,
-            userId: Meteor.userId() // Optional, used to check on server for file tampering
+            userId: Meteor.userId(), // Optional, used to check on server for file tampering
+//            tags: this.props.tags
           },
           streams: 'dynamic',
           chunkSize: 'dynamic',
@@ -127,40 +128,62 @@ export default FileUploadComponent = React.createClass({
       let showit = fileCursors.map((aFile, key) => {
         // console.log('A file: ', aFile.link(), aFile.get('name'));
 
-        let link = Images.findOne({_id: aFile._id}).link();  //The "view/download" link
+        let link = ImagesCollection.findOne({_id: aFile._id}).link();  //The "view/download" link
 
         // Send out components that show details of each file
-        return <div key={'file' + key}>
+        //return <div key={'file' + key}>
+        return (
           <IndividualFile
+            key={'file' + key}
             fileName={aFile.name}
             fileUrl={link}
             fileId={aFile._id}
             fileSize={aFile.size}
           />
-        </div>
+        )
+        //</div>
       });
-
-      return <div>
+/*
+      return (
         <div className="o-layout">
           <div className="o-layout__item u-12/12">
-            <p>Upload New File:</p>
-            <input type="file" id="fileinput" disabled={this.state.inProgress} ref="fileinput"
-                 onChange={this.uploadIt}/>
+              <div id="fileUploadBox" className="o-layout__item u-12/12">
+                <div className="o-media">
+                  <i className="fa fa-upload o-media__img" aria-hidden="true"></i>
+                  <div className="o-media__body">
+                    <h4>Dodaj nowy obrazek:</h4>
+                    <input 
+                      type="file"
+                      id="fileinput" 
+                      disabled={this.state.inProgress} 
+                      ref="fileinput"
+                      //onChange={this.uploadIt}
+                      onSubmit={this.uploadIt}
+                    />
+                  </div>
+                </div>
+              </div>
           </div>
-        </div>
+            {showit}
 
           <div className="o-layout__item u-6/12">
-
-            {this.showUploads()}
-
+                {this.showUploads()}
           </div>
-          <div className="o-layout__item u-6/12">
-         </div>
-
-        {showit}
-
-      </div>
+       </div>
+      )
     }
+    else return <div></div>
+  }
+  */
+      return (
+        <input 
+          type="file"
+          id="fileinput" 
+          disabled={this.state.inProgress} 
+          ref="fileinput"
+          onSubmit={this.uploadIt}
+        />
+    )}
     else return <div></div>
   }
 });

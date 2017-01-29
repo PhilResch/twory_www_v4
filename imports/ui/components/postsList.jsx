@@ -3,112 +3,90 @@ import React, { Component, PropTypes } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import { browserHistory } from 'react-router';
 import { PostsCollection } from '../../../lib/postsCollection.js';
-import TestPostList from './testPostList.jsx';
-import AccountsUIWrapper from '../components/accountsUIWrapper.jsx';
-import FileIndividualFile from '../components/fileIndividualFile.jsx';
-import FileUpload from '../components/fileUpload.jsx';
+import PostsListItem from './postsListItem.jsx';
+
+//////////////////////////////////////////////////////////
+import IndividualFile from './fileIndividualFile.jsx';
+import {_} from 'meteor/underscore';
+import { ImagesCollection } from '../../../lib/imagesCollection.js';
+//////////////////////////////////////////////////////////
+
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 export default class PostsList extends Component {
-    handleNewPost() {
-        Meteor.call('createNewPost', (error, postId) => {
-            if (error) {
-                Bert.alert(error.reason, 'danger');
-            }
-            else {
-                browserHistory.push(`/posts/${ postId }/edit`);
-            }
-        })
-    }
-    
-    renderPostsList() {
-        if (this.data.posts.length > 0) {
-            return <ListGroup linked={true} items={this.data.posts} />;
-        }
-        else {
-            return <WarningAlert>No posts found!</WarningAlert>;
-        }
-    }
-    
+
     getPosts() {
         let posts = [];
         for (let i=0; i < this.props.posts.length; i++) {
+            let imageId = this.props.posts[i].image;
+            let imageLink = ImagesCollection.findOne({_id: imageId}).link();
             posts.push({
                 _id: i,
                 title: this.props.posts[i].label,
-                //content: this.props.posts[i].content
+                content: this.props.posts[i].content,
+                tags: this.props.posts[i].tags,
+                image: imageLink,
+                slug: this.props.posts[i].slug
             });
         }
-        console.log(posts);
         return posts;
     }
+    
 
     renderPosts() {
         return this.getPosts().map((post) =>(
-            <TestPostList key={post._id} title={post.title} />
+            <PostsListItem 
+                key={post._id} 
+                title={post.title} 
+                content={post.content} 
+                tags={post.tags}
+                image={post.image}
+                slug={post.slug}
+                parentPathname = {this.props.location.pathname}
+                />
         ));
     }
-    
-    insertNewPosts(event) {
-        event.preventDefault();
-        let title = event.target.title.value;
-        let content = event.target.content.value;
-        let newPost = {
-            title: title,
-            content: content
-        };
-        Meteor.call('createNewPost', newPost);
-    }
-    
-    render() {
-        console.log("PostsList props: ");
-        console.log(this.props);
-        return (
-             /*
-             <GridRow>
-                <GridColumn className="column">
-                    <SuccessButton type="button" label="New Post" onClick={this.handleNewPost} />
-                    <PageHeader size="h4" label="Posts" />
-                    {this.renderPostsList()}
-                </GridColumn>
-             </GridRow>
-             */
-             /*
-             <div>
-                <h1>WHAT THE FUCK</h1>
-                {this.renderPostsList()}
-                <button type="button" label="New Post" onClick={this.handleNewPost} />
-                <button type="button" label="Insert Post" onClick={this.insertNewPost} />
-            </div>
-            */
-            <div className="o-box">
-                <AccountsUIWrapper />
-                
-                <form id="testForm" onSubmit={this.insertNewPosts}>
-                    Nazwa klienta:<br />
-                    <input type="text" name="title" defaultValue="Mickey" />
-                    <br />
-                    Opis projektu:<br />
-                    <input type="text" name="content" defaultValue="Mouse" />
-                    <br/><br/>
-                    <input type="submit" value="Submit"/>
-                </form>
 
-                <FileUpload /> 
-                
-                {this.renderPosts()}       
-            </div>
-        )
+    render() {
+        console.log(this.props);
+        if(this.props.docsReadyYet && this.props.postsCollectionIsReady) {
+            return (
+                <div className="o-box-negative-margin">
+                    <ReactCSSTransitionGroup
+                        transitionName="posts-list"
+                        transitionAppear={true} 
+                        transitionAppearTimeout={500} 
+                        transitionEnterTimeout={1000}
+                        transitionLeaveTimeout={500}
+                    > 
+                        {this.renderPosts()}
+                    </ReactCSSTransitionGroup>
+                </div>
+            )
+        }
+        else {
+            return <div>Loading list of posts</div>;
+        }
     }
 }
 
 export default createContainer(() => {
     postsCollectionSubscription = Meteor.subscribe('postsCollection');
-    return {
+    imagesCollectionSubscription = Meteor.subscribe('files.images.all');
+    return { 
+        docsReadyYet: imagesCollectionSubscription.ready(),
+        docs: ImagesCollection.find().fetch(),
+        postsCollectionIsReady: postsCollectionSubscription.ready(),
+        
         posts: PostsCollection.find().fetch().map((post) => {
             return {
                 uid: post._id,
-                href: '/posts/${post._id}/edit',
-                label: post.title
+                href: `/posts/${post._id}/edit`,
+                label: post.title,
+                content: post.content,
+                tags: post.tags,
+                image: post.image,
+                slug: post.slug
             };
         })
     };

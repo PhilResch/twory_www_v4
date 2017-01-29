@@ -28,3 +28,4 @@ seba:minifiers-autoprefixer
 fourseven:scss@=3.2.0
 ostrio:files
 fortawesome:fontawesome
+alanning:roles

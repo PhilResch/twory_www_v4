@@ -4,7 +4,6 @@ import { createContainer } from 'meteor/react-meteor-data';
 import { render } from 'react-dom';
 import React, { Component, PropTypes } from 'react';
 
-//import { PagesCollection } from '../../api/pagesCollection.js';
 import { PagesCollection } from '../../../lib/pagesCollection.js';
 
 import MenuItem from './menuItem.jsx';
@@ -25,12 +24,12 @@ export default class Navigation extends Component {
 					component: "studio.jsx"	
 				},
 				{
-					title: "Blog",
-					component: "blog.jsx"	
+					title: "Admin",
+					component: "admin.jsx"	
 				},	
 				{
-					title: "Contact",
-					component: "contact.jsx"	
+					title: "Editor",
+					component: "editor.jsx"	
 				},					
 				{
 					title: "PostsList",
@@ -78,16 +77,16 @@ export default class Navigation extends Component {
 				</div>
 
 				<div id="mainMenu" className="o-layout__item u-5/12">
-					<ul className="o-list-inline o-pack">
+					<ul className="o-list-inline o-pack o-pack--auto">
 						{this.renderLinks()}
 					</ul>
 				</div>
 
-				<div id="orderButton" className="o-layout__item u-4/12">
+				<div id="orderButton" className="o-layout__item u-3/12">
 					<input type="submit" value="Złóż zamówienie"/>
 				</div>
 
-				<div id="social-media-buttons" className="o-layout__item  u-1/12">
+				<div id="social-media-buttons" className="o-layout__item  u-2/12">
 					<i className="fa fa-facebook-official" aria-hidden="true"></i>
 					<i className="fa fa-twitter-square" aria-hidden="true"></i>
 					<i className="fa fa-pinterest" aria-hidden="true"></i>
@@ -102,7 +101,7 @@ export default createContainer(() => {
   pagesCollectionSubscription = Meteor.subscribe('pagesCollection');
   loading = !pagesCollectionSubscription.ready();
   pagesCollectionExists = !loading;
-  console.log("Is the pagesCollection loading? :" + loading);
+  //console.log("Is the pagesCollection loading? :" + loading);
   return {
 	pagesCollectionIsReady: pagesCollectionSubscription.ready() ? true : false,
     pagesCollection: pagesCollectionExists ? PagesCollection.find({}).fetch() : [],
