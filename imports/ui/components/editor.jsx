@@ -13,53 +13,84 @@ import { ImagesCollection } from '../../../lib/imagesCollection.js';
 //////////////////////////////////////////////////////////
 
 export default class Editor extends Component {
-    convertStringToArray(stringToConvert, delimeter) {
-       return stringToConvert.split(delimeter);
+
+    insertNewPosts(event) {
+        let newPost = this.getValuesFromForm(event);
+        let file = this.getFileFromForm(event);
+        this.promiseToUpload(file)
+            .then(function(result) {
+                console.log("Result is: " + JSON.stringify(result._id));
+                newPost.image = result._id;
+                console.log (JSON.stringify(newPost));
+            })
+            .then(function() {
+                Meteor.call('createNewPost', newPost)
+            });
     }
     
-    insertNewPosts(event) {
+    promiseToUpload(file) {
+        return new Promise((resolve, reject) => {
+            ImagesCollection.insert(file, false)
+                .on('error', (error, fileRef) => {
+                    reject(error, fileRef)
+                })
+                .on('end', (error, fileRef) => {
+                    if (!error) {
+                        console.log("Seems like the promise is resolved!");
+                        resolve(fileRef);
+                    }
+                    else {
+                        reject(error, fileRef);
+                    }
+                })
+                .start();
+        })
+    }
+    
+    getValuesFromForm(event) {
         event.preventDefault();       
         
-        let title = event.target.title.value;
+        let title =  event.target.title.value;
         let content = event.target.content.value;
-        let imageId = "";
         let tags = this.convertStringToArray(event.target.tags.value, ",");
         let slug = getSlug(title);
+
+        let formFieldValues = {
+            title: title,
+            content: content,
+            tags: tags,
+            slug: slug
+        }
+        console.log("formFieldValues: " + JSON.stringify(formFieldValues));
+        return formFieldValues;
+    }
+    
+    getFileFromForm(event) {
+        let fileToInsert ="";
         
         if (event.target.image.files && event.target.image.files[0]) {
-            var file = event.target.image.files[0];
+            const file = event.target.image.files[0];
 
             if (file) {
-                let image = {
+                fileToInsert = {
                     file: file,
                     meta: {
-                        associatedArticleTitle: title,
-                        tags: tags,
-                        userId: Meteor.userId(), // Optional, used to check on server for file tampering
-                    //     locator: this.props.fileLocator,
+                        associatedArticleTitle: event.target.title.value,
+                        tags: this.convertStringToArray(event.target.tags.value, ","),
+                        userId: Meteor.userId(),
                     },
                     streams: 'dynamic',
                     chunkSize: 'dynamic',
-                    allowWebWorkers: true // If you see issues with uploads, change this to false
+                    allowWebWorkers: true
                 }
-                
-                let uploadInstance = ImagesCollection.insert(image, false);
-                
-                uploadInstance.on('uploaded', function (error, fileRef) {
-                   imageId = fileRef._id; 
-                    let newPost = {
-                        title: title,
-                        content: content,
-                        image:  imageId,
-                        tags: tags,
-                        slug: slug
-                   };
-                   Meteor.call('createNewPost', newPost);
-                });
-                
-                uploadInstance.start();
             }
         }
+        console.log("fileToInsert: " + JSON.stringify(fileToInsert));
+        return fileToInsert;
+    }
+
+    convertStringToArray(stringToConvert, delimeter) {
+       return stringToConvert.split(delimeter);
     }
     
     render() {
