@@ -1,169 +1,73 @@
-import { Meteor } from 'meteor/meteor';
-import React, { Component, PropTypes } from 'react';
-import { createContainer } from 'meteor/react-meteor-data';
-import { browserHistory } from 'react-router';
-import { PostsCollection } from '../../../lib/postsCollection.js';
+import React, { Component } from 'react';
+import FormField from './formField.jsx';
 
-import FormField from '../components/formField.jsx';
+class Editor extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+        contentComponents: [] 
+    };
+  }
 
-//////////////////////////////////////////////////////////
-import IndividualFile from './fileIndividualFile.jsx';
-import {_} from 'meteor/underscore';
-import { ImagesCollection } from '../../../lib/imagesCollection.js';
-//////////////////////////////////////////////////////////
-
-export default class Editor extends Component {
-
-    insertNewPosts(event) {
-        let newPost = this.getValuesFromForm(event);
-        let file = this.getFileFromForm(event);
-        this.promiseToUpload(file)
-            .then(function(result) {
-                console.log("Result is: " + JSON.stringify(result._id));
-                newPost.image = result._id;
-                console.log (JSON.stringify(newPost));
-            })
-            .then(function() {
-                Meteor.call('createNewPost', newPost)
-            });
+    componentDidMount() {
+        this.setState({
+            contentComponents: 
+            [
+                <FormField 
+                    title="Tytuł artykułu lub nazwa klienta" 
+                    type="text" 
+                    name="title" 
+                    placeholder="Wprowadź tytuł" 
+                />,
+                <FormField 
+                    title="Tagi" 
+                    type="text" 
+                    name="tags" 
+                    placeholder="np. Logo" 
+                /> 
+            ]
+        });
     }
-    
-    promiseToUpload(file) {
-        return new Promise((resolve, reject) => {
-            ImagesCollection.insert(file, false)
-                .on('error', (error, fileRef) => {
-                    reject(error, fileRef)
-                })
-                .on('end', (error, fileRef) => {
-                    if (!error) {
-                        console.log("Seems like the promise is resolved!");
-                        resolve(fileRef);
-                    }
-                    else {
-                        reject(error, fileRef);
-                    }
-                })
-                .start();
-        })
+
+    componentWillUnmount() {
     }
-    
-    getValuesFromForm(event) {
-        event.preventDefault();       
+
+    addContentForm() {
+        let updatedContentComponentsArray = this.getContentComponents();
+        updatedContentComponentsArray.push(
+            <FormField 
+                    title="Treść" 
+                    type="textarea" 
+                    rows="20"
+                    name="content" 
+                    placeholder="Wprowadź treść" 
+                />
+        )
         
-        let title =  event.target.title.value;
-        let content = event.target.content.value;
-        let tags = this.convertStringToArray(event.target.tags.value, ",");
-        let slug = getSlug(title);
-
-        let formFieldValues = {
-            title: title,
-            content: content,
-            tags: tags,
-            slug: slug
-        }
-        console.log("formFieldValues: " + JSON.stringify(formFieldValues));
-        return formFieldValues;
+        this.setState({
+            contentComponents: updatedContentComponentsArray
+        });
     }
     
-    getFileFromForm(event) {
-        let fileToInsert ="";
-        
-        if (event.target.image.files && event.target.image.files[0]) {
-            const file = event.target.image.files[0];
-
-            if (file) {
-                fileToInsert = {
-                    file: file,
-                    meta: {
-                        associatedArticleTitle: event.target.title.value,
-                        tags: this.convertStringToArray(event.target.tags.value, ","),
-                        userId: Meteor.userId(),
-                    },
-                    streams: 'dynamic',
-                    chunkSize: 'dynamic',
-                    allowWebWorkers: true
-                }
-            }
-        }
-        console.log("fileToInsert: " + JSON.stringify(fileToInsert));
-        return fileToInsert;
+    getContentComponents() {
+        console.log("Is this shit called?");
+        let ContentComponents = this.state.contentComponents.slice();
+        return ContentComponents;
     }
 
-    convertStringToArray(stringToConvert, delimeter) {
-       return stringToConvert.split(delimeter);
-    }
-    
     render() {
-        if(this.props.docsReadyYet && this.props.postsCollectionIsReady) {
-            return (
-                <div id="editor" className="u-1/2">
-                    <div className="o-box--small ">
-                        <h2>Dodawanie artykułów</h2>
-                    </div>
+        return (
+            <div id="editor" className="u-1/2">
+                <form id="testForm">
+                    {this.state.contentComponents}
+                </form>
 
-                    <form id="testForm" onSubmit={this.insertNewPosts.bind(this)}>
-                        <FormField 
-                            title="Tytuł artykułu lub nazwa klienta" 
-                            type="text" 
-                            name="title" 
-                            placeholder="Wprowadź tytuł" 
-                        />
-                        
-                        <FormField 
-                            title="Tagi" 
-                            type="text" 
-                            name="tags" 
-                            placeholder="np. Logo" 
-                        /> 
-                        
-                        <FormField 
-                            title="Treść" 
-                            type="textarea" 
-                            rows="20"
-                            name="content" 
-                            placeholder="Wprowadź treść" 
-                        />
-                        
-                       <FormField 
-                            title="Obrazki" 
-                            id="fileinput"
-                            type="file" 
-                            name="image" 
-                        /> 
-                        
-                        <FormField
-                            id="submitButton"
-                            type="submit"
-                            value="Dodaj artykuł"
-                        />
-                        
-                    </form>
-                </div>
-            )
-        }
-        else {
-            return <div>Loading posts and images.</div>;
-        }
+                <button onClick={this.addContentForm.bind(this)}>
+                    Dodaj treść lub multimedia
+                </button>
+            </div>
+        );
     }
 }
 
-export default createContainer(() => {
-    postsCollectionSubscription = Meteor.subscribe('postsCollection');
-    imagesCollectionSubscription = Meteor.subscribe('files.images.all');
-    return { 
-        docsReadyYet: imagesCollectionSubscription.ready(),
-        docs: ImagesCollection.find().fetch(),
-        postsCollectionIsReady: postsCollectionSubscription.ready(),
-        
-        posts: PostsCollection.find().fetch().map((post) => {
-            return {
-                uid: post._id,
-                href: '/posts/${post._id}/edit',
-                label: post.title,
-                content: post.content,
-                tags: post.tags,
-                image: post.image
-            };
-        })
-    };
-}, Editor);
+export default Editor;
