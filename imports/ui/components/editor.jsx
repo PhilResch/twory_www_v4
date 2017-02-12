@@ -14,13 +14,15 @@ class Editor extends React.Component {
         this.setState({
             contentComponents: 
             [
-                <FormField 
+                <FormField
+                    key = {1} 
                     title="Tytuł artykułu lub nazwa klienta" 
                     type="text" 
                     name="title" 
                     placeholder="Wprowadź tytuł" 
                 />,
                 <FormField 
+                    key = {2}
                     title="Tagi" 
                     type="text" 
                     name="tags" 
@@ -34,9 +36,11 @@ class Editor extends React.Component {
     }
 
     addContentForm() {
+        console.log (this.state.contentComponents.length + 1);
         let updatedContentComponentsArray = this.getContentComponents();
         updatedContentComponentsArray.push(
             <FormField 
+                    key= {this.state.contentComponents.length + 1}
                     title="Treść" 
                     type="textarea" 
                     rows="20"
