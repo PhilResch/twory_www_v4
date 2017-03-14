@@ -28,7 +28,8 @@ class Dropdown extends Component {
     render() {
         console.log(JSON.stringify(this.props));
         return (
-            <select onChange={this.props.onChangeFunction.bind(this)}>
+            //<select onChange={this.props.onChangeFunction.bind(this)}>
+            <select onChange={this.props.onChangeFunction}>
                 {this.renderOptions()}
             </select>
         );
