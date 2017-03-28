@@ -8,6 +8,23 @@ import { ImagesCollection } from '../../../lib/imagesCollection.js';
 
 
 export default class Post extends Component {
+    getImageOrPlaceholder(post) {
+        if (post.image) {
+            return post.image;
+        }
+        else {
+            return "Placeholder image";
+        }
+    }
+    
+    getImageLink(imageId) {
+        if (imageId == "Placeholder image") {
+            return "/img/1.jpg"
+        }
+        else {
+            return ImagesCollection.findOne({_id: imageId}).link();
+        }
+    }
 
 	render() {
 		console.log("------------------------");
@@ -19,8 +36,10 @@ export default class Post extends Component {
 			let post = this.props.post;
 
 			let title = post.title;
-			let imageId = post.image;
-			let imageLink = ImagesCollection.findOne({_id: imageId}).link();
+			//let imageId = post.image;
+			//let imageLink = ImagesCollection.findOne({_id: imageId}).link();
+			let imageId = this.getImageOrPlaceholder(post);
+            let imageLink = this.getImageLink(imageId);
 			let content = post.content;
 			let tags = post.tags;
 

@@ -1,0 +1,19 @@
+@import 'node_modules/inuitcss/settings/_settings.core.scss';
+@import 'node_modules/inuitcss/tools/_tools.font-size.scss';
+@import 'node_modules/inuitcss/tools/_tools.clearfix.scss';
+@import 'node_modules/inuitcss/objects/objects.wrapper.scss';
+@import 'node_modules/inuitcss/utilities/_utilities.widths.scss';
+
+#postEditor {
+    margin: auto;
+
+    input, #h1Input {
+        border-bottom: 1px solid gray;
+        outline: 0;
+        
+        &:hover, &:focus {
+            opacity: 1;
+            transition: opacity 1s;
+        }
+    }
+}

@@ -1,8 +1,12 @@
-import React, { Component } from 'react';
+import { Meteor } from 'meteor/meteor';
+import React, { Component, PropTypes } from 'react';
+import { createContainer } from 'meteor/react-meteor-data';
+import { browserHistory } from 'react-router';
+import { PostsCollection } from '../../../lib/postsCollection.js';
+import { ImagesCollection } from '../../../lib/imagesCollection.js';
 import FormField from './formField.jsx';
-import Dropdown from './dropdown.jsx';
 
-class Editor extends React.Component {
+export default class Editor extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -10,100 +14,58 @@ class Editor extends React.Component {
     };
   }
 
-    componentDidMount() {
-        this.setState({
-            contentComponents: 
-            [
-                <FormField
-                    key = {1} 
-                    title="Tytuł artykułu lub nazwa klienta" 
-                    type="text" 
-                    name="title" 
-                    placeholder="Wprowadź tytuł" 
-                />,
-                <FormField 
-                    key = {2}
-                    title="Tagi" 
-                    type="text" 
-                    name="tags" 
-                    placeholder="np. Logo" 
-                /> 
-            ]
-        });
+    renderPosts() {
+        if(this.props.post) {
+            console.log(this.props);
+            return this.getFieldsFromPost(this.props.postId);
+        }
+        else {
+            return (
+                <div>
+                    {console.log(this.props)}
+                    <p>There are no posts. Click the button to create one.</p>
+                    <button onClick={this.createNewEmptyPost}>Create new post</button>
+                </div>
+            );        
+        }
     }
-
-    componentWillUnmount() {
+    
+    getFieldsFromPost(post) {
+        return (
+            <div>
+                <h1>{this.props.post.title}</h1>
+                <p>{this.props.post.content}</p>
+            </div>
+        );
     }
-
-    addContentForm() {
-        console.log (this.state.contentComponents.length + 1);
-        let updatedContentComponentsArray = this.getContentComponents();
-        updatedContentComponentsArray.push(
-            <FormField 
-                    key= {this.state.contentComponents.length + 1}
-                    title="Treść" 
-                    type="textarea" 
-                    rows="20"
-                    name="content" 
-                    placeholder="Wprowadź treść" 
-                />
-        )
+    
+    createNewEmptyPost() {
+        event.preventDefault();
+        let newPost = {
+            title: "New post made on " + new Date().toUTCString(),
+            content: "Placeholder content",
+            tags: "",
+            slug: getSlug("New post made on " + new Date().toUTCString())
+        }
         
-        this.setState({
-            contentComponents: updatedContentComponentsArray
-        });
-    }
-    
-    getContentComponents() {
-        console.log("Is this shit called?");
-        let ContentComponents = this.state.contentComponents.slice();
-        return ContentComponents;
-    }
-    
-    changeExplanation() {
-        console.log("changeExplanation called");
+        return Meteor.call('createNewPost', newPost);
     }
 
     render() {
-        let options = [
-            {
-                value: "Akapit",
-                description: "Akapit z opcjonalnym obrazkiem"
-            },
-            {
-                value: "Obrazek",
-                description: "Obrazek lub szereg obrazków z opcjonalnym opisem"
-            },
-            {
-                value: "Film",
-                description: "Film YouTube"
-            },
-            {
-                value: "3D",
-                description: "Model 3D"
-            }
-        ];
-        
         return (
-            <div id="editor" className="u-1/2">
-                <form id="testForm">
-                    {this.state.contentComponents}
-                </form>
-
-                <button onClick={this.addContentForm.bind(this)}>
-                    Dodaj treść lub multimedia
-                </button>
-            
-            <form>
-                <Dropdown 
-                    options={options}
-                    onChangeFunction={this.changeExplanation.bind(this)}
-                />
+            <form id="post-editor">
+                {this.renderPosts()}
             </form>
-            
-            </div>
         );
     }
 }
 
-export default Editor;
+Editor.defaultProps = {
+//SCHEMA FOR PostsCollection WAS DISABLED TO TEST THIS. REENABLE LATER!
+    post: {
+            title: "New post made on " + new Date().toUTCString(),
+            content: "Placeholder content",
+            tags: "",
+            slug: getSlug("New post made on " + new Date().toUTCString())
+    }
+}
