@@ -5,6 +5,7 @@ import { browserHistory } from 'react-router';
 import { PostsCollection } from '../../../lib/postsCollection.js';
 import { ImagesCollection } from '../../../lib/imagesCollection.js';
 import FormField from './formField.jsx';
+import Content from './content.jsx';
 
 export default class Editor extends Component {
   constructor(props) {
@@ -14,10 +15,9 @@ export default class Editor extends Component {
     };
   }
 
-    renderPosts() {
+    renderPost() {
         if(this.props.post) {
-            console.log(this.props);
-            return this.getFieldsFromPost(this.props.postId);
+            return this.getFieldsFromPost();
         }
         else {
             return (
@@ -30,11 +30,16 @@ export default class Editor extends Component {
         }
     }
     
-    getFieldsFromPost(post) {
+    getFieldsFromPost() {
+        let post = this.props.post;
         return (
             <div>
-                <h1>{this.props.post.title}</h1>
-                <p>{this.props.post.content}</p>
+                {post.contents.map((item) => {
+                    return <Content 
+                            type={item.type}
+                            content={item.content} 
+                        />
+                })} 
             </div>
         );
     }
@@ -54,7 +59,7 @@ export default class Editor extends Component {
     render() {
         return (
             <form id="post-editor">
-                {this.renderPosts()}
+                {this.renderPost()}
             </form>
         );
     }
@@ -63,9 +68,24 @@ export default class Editor extends Component {
 Editor.defaultProps = {
 //SCHEMA FOR PostsCollection WAS DISABLED TO TEST THIS. REENABLE LATER!
     post: {
-            title: "New post made on " + new Date().toUTCString(),
-            content: "Placeholder content",
             tags: "",
-            slug: getSlug("New post made on " + new Date().toUTCString())
+            contents: [
+                {
+                    type: "image",
+                    content: "/img/1.jpg"
+                },
+                {
+                    type: "title",
+                    content: "New post made on " + new Date().toUTCString(),
+                },
+                {
+                    type: "paragraph",
+                    content: "Lorem ipsum"
+                },
+                {
+                    type: "paragraph",
+                    content: "Dolor sit"
+                }
+            ],
     }
 }
