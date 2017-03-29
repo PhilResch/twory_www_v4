@@ -24,13 +24,11 @@ export default class PostsListItem extends Component {
     
     renderEditButton() {
         console.log("renderEditButton called");
-        if (Roles.userIsInRole( Meteor.user()._id, ['admin'], "default-group" )) {
+        if (Meteor.user() && Roles.userIsInRole( Meteor.user()._id, ['admin'], "default-group" )) {
             console.log("User is an admin");
             return <Link to={this.getLink() + "/edit"}>
                 <i className="fa fa-cog editPostButton" aria-hidden="true"></i>
             </Link>
-        } else {
-            console.log("User is not an admin");
         }
     }
     

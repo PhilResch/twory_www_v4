@@ -8,46 +8,102 @@ import FormField from './formField.jsx';
 import Content from './content.jsx';
 
 export default class Editor extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-        contentComponents: [] 
-    };
-  }
+    constructor(props) {
+        super(props);
+        this.state = {
+            contentComponents: [] 
+        };
+    }
 
-    renderPost() {
-        if(this.props.post) {
-            console.log("this.props.post: ");
-            console.log(this.props.post);
-            return this.getFieldsFromPost();
-        }
+    getInitialState() {
+        return {
+            editing: null
+        };
+    }
+    
+    toggleEditing(itemKey) {
+        console.log("toggleEditing toggled.")
+        this.setState({editing: itemKey});
+        console.log("Currently editing item with key: " + itemKey);
+    }
+
+    renderContentOrEditField(item) {
+        if(this.state.editing == item.key) {
+            return <FormField
+                key={item.key}
+                name={item.type}
+                type={this.determineInputType(item.type)}
+                placeholder={item.content}
+                defaultValue={item.content}
+                onKeyDown={this.updatePost.bind(this)}
+                />
+        } 
         else {
-            return (
-                <div>
-                    {console.log(this.props)}
-                    <p>There are no posts. Click the button to create one.</p>
-                    <button onClick={this.createNewEmptyPost}>Create new post</button>
-                </div>
-            );        
+            return <Content 
+                    key={item.key}
+                    type={item.type}
+                    content={item.content} 
+                    onClick={ this.toggleEditing.bind( this, item.key ) }
+                    />
         }
     }
     
-    getFieldsFromPost() {
+    determineInputType(item) {
+        switch(item) {
+            case "title":
+            case "paragraph":
+                return "textarea";
+                break;
+            case "image":
+                return "file";
+                break;
+            case "tags":
+                return "text";
+                break;
+            default:
+                console.log("WARNING: determineInputType received wrong input type: " + item)
+                break;
+        }
+    }
+    
+    updatePost(event) {
+        event.preventDefault();
+        if ( event.keyCode === 13 ) {
+            let target = event.target,
+                update = { 
+                    "contents": {
+
+                     }
+                };
+
+            update._id = this.state.editing;
+            update[ target.name ] = target.value;
+
+            this.setState({editing : null});
+            console.log("Update value: " + JSON.stringify(update));
+        }
+        console.log("Update post called");
+    }
+    
+    renderPost() {
         let post = this.props.post;
-        return (
-            <div>
-                {post.contents.map((item) => {
-                    return <Content 
-                            key={item.key}
-                            type={item.type}
-                            content={item.content} 
-                        />
-                })} 
-            </div>
-        );
+
+        if(post) {
+            return (
+                <div>
+                    {post.contents.map((item) => {
+                        return this.renderContentOrEditField(item)
+                    })} 
+                </div>
+            );
+        }
+        else {
+            return <p>Nothing here yet</p>
+        }
     }
     
     uploadChanges() {
+        
         event.preventDefault();
     }
 

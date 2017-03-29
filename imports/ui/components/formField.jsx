@@ -19,10 +19,14 @@ export default class FormField extends Component {
             <textarea 
                 rows={this.props.rows} 
                 id={this.props.id}
+                className={this.props.className}
                 ref={this.props.ref}
                 name={this.props.name}
                 placeholder={this.props.placeholder}
+                defaultValue={this.props.defaultValue}
                 disabled={this.props.disabled}
+                onSubmit={this.props.onSubmit}
+                onKeyDown={this.props.onKeyDown}
             />
         )
     }
@@ -32,11 +36,14 @@ export default class FormField extends Component {
             <input 
                 type={this.props.type}
                 id={this.props.id}
+                className={this.props.className}
                 ref={this.props.id}
                 name={this.props.name} 
                 placeholder={this.props.placeholder}
-                value={this.props.value}
+                defaultValue={this.props.defaultValue}
                 disabled={this.props.disabled}
+                onSubmit={this.props.onSubmit}
+                onKeyDown={this.props.onKeyDown}
             />
         )
     }

@@ -20,7 +20,11 @@ export default class Content extends Component {
     }
     
 	renderImage() {
-		return <img className={this.props.type} src={this.getImageOrPlaceholder(this.props.content)}/>
+		return <img 
+			onClick={this.props.onClick}
+			className={this.props.type} 
+			src={this.getImageOrPlaceholder(this.props.content)}
+		/>
 	}
 	
 	getImageOrPlaceholder(image) {
@@ -32,11 +36,17 @@ export default class Content extends Component {
 	}
 	
 	renderTitle() {
-		return <h1 className={this.props.type}>{this.props.content}</h1>
+		return <h1 
+			onClick={this.props.onClick} 
+			className={this.props.type}>{this.props.content}
+		</h1>
 	}
 	
 	renderParagraph() {
-		return <p className={this.props.type}>{this.props.content}</p>
+		return <p 
+			onClick={this.props.onClick} 
+			className={this.props.type}>{this.props.content}
+		</p>
 	}
 
 	render() {
