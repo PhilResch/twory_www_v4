@@ -17,6 +17,7 @@ Meteor.startup( () => {
                 dateCreated: new Date().toTimeString(),
                 slug: slug,
                 tags: "",
+                
                 contents: [
                 {
                     key: generateKey(),

@@ -67,20 +67,30 @@ export default class Editor extends Component {
     }
     
     updatePost(event) {
-        event.preventDefault();
         if ( event.keyCode === 13 ) {
-            let target = event.target,
-                update = { 
-                    "contents": {
-
-                     }
-                };
-
-            update._id = this.state.editing;
-            update[ target.name ] = target.value;
-
+            let target = event.target;
+            /*
+            update = {_id: this.props.post._id};
+            update.key = this.state.editing;
+            update.type = target.name;
+            update.content = target.value;
+            */
+/*
+let selector = {"_id": "CqFckh6sC7hrPeSiB", "contents.key": 0.6995841453317553}
+db.postsCollection.update(selector, {$set: {"contents.$.content": "JEST!"}})
+*/
+            let selector = {
+                "_id": this.props.post._id, 
+                "contents.key": this.state.editing
+            }
+            let changes = {
+                    "contents.$.content": target.value
+            }
+            let update = {selector, changes}; 
+            
             this.setState({editing : null});
             console.log("Update value: " + JSON.stringify(update));
+            Meteor.call("updatePost", update)
         }
         console.log("Update post called");
     }
@@ -139,3 +149,7 @@ export default createContainer((props) => {
 	};
 
 }, Editor)
+/*
+let selector = {"_id": "CqFckh6sC7hrPeSiB", "contents.key": 0.6995841453317553}
+db.postsCollection.update(selector, {$set: {"contents.$.content": "JEST!"}})
+*/
