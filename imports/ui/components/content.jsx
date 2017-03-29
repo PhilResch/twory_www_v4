@@ -20,7 +20,15 @@ export default class Content extends Component {
     }
     
 	renderImage() {
-		return <img className={this.props.type} src={this.props.content}/>
+		return <img className={this.props.type} src={this.getImageOrPlaceholder(this.props.content)}/>
+	}
+	
+	getImageOrPlaceholder(image) {
+		if(image=="Placeholder image") {
+			return "/img/1.jpg";
+		} else {
+			return image;
+		}
 	}
 	
 	renderTitle() {

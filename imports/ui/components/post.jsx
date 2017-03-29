@@ -35,12 +35,10 @@ export default class Post extends Component {
 		
 			let post = this.props.post;
 
-			let title = post.title;
-			//let imageId = post.image;
-			//let imageLink = ImagesCollection.findOne({_id: imageId}).link();
+			let title = post.contents[1]["content"];
 			let imageId = this.getImageOrPlaceholder(post);
             let imageLink = this.getImageLink(imageId);
-			let content = post.content;
+			let content = post.contents;
 			let tags = post.tags;
 
 			return ( 
@@ -101,7 +99,6 @@ export default createContainer((props) => {
 
 	return {
 		imagesAreReady: imagesCollectionSubscription.ready(),
-		//images: ImagesCollection.find({_id: props.params.image}).fetch(),
 		images: ImagesCollection.find().fetch(),
 		
 		postIsReady: singlePostSubscription.ready() ? true : false,

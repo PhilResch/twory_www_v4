@@ -14,7 +14,6 @@ export default class PostsListItem extends Component {
             let tags = this.props.tags;
             let key = 0;
             
-            // key={tag} is probably a very hacky way to deal with key 
             return tags.map((tag) => (
                 <li key={tag} className="o-list-inline__item">{tag}</li>
             ));
@@ -23,13 +22,26 @@ export default class PostsListItem extends Component {
         }
     }
     
+    renderEditButton() {
+        console.log("renderEditButton called");
+        if (Roles.userIsInRole( Meteor.user()._id, ['admin'], "default-group" )) {
+            console.log("User is an admin");
+            return <Link to={this.getLink() + "/edit"}>
+                <i className="fa fa-cog editPostButton" aria-hidden="true"></i>
+            </Link>
+        } else {
+            console.log("User is not an admin");
+        }
+    }
+    
     render() {
         return (
             <div className="portfolioItem o-box--small thumbnail u-1/3@wide u-1/2@desktop u-1/1@mobile">
+                {this.renderEditButton()}
                 <Link to={this.getLink()}>
                     <div className="portfolioBox u-1/1">
                             <div className="portfolioInfo">
-                                <h4>{this.props.title}</h4>
+                                <h4>{this.props.title}</h4> 
                                 <ul className="tags o-list-inline--delimited">
                                     {this.renderTags()}
                                 </ul>

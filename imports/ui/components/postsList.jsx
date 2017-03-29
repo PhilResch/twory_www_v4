@@ -16,7 +16,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 export default class PostsList extends Component {
 
     getImageOrPlaceholder(post) {
-        if (post.image) {
+        if (post.image && post.image !== "Placeholder image") {
             return post.image;
         }
         else {
@@ -36,14 +36,11 @@ export default class PostsList extends Component {
     getPosts() {
         let posts = [];
         for (let i=0; i < this.props.posts.length; i++) {
-            //let imageId = this.props.posts[i].image;
-            //let imageLink = ImagesCollection.findOne({_id: imageId}).link();
-            let imageId = this.getImageOrPlaceholder(this.props.posts[i]);
+            let imageId = this.getImageOrPlaceholder(this.props.posts[i].image);
             let imageLink = this.getImageLink(imageId);
             posts.push({
                 _id: i,
-                title: this.props.posts[i].label,
-                content: this.props.posts[i].content,
+                title: this.props.posts[i].contents[1]["content"],
                 tags: this.props.posts[i].tags,
                 image: imageLink,
                 slug: this.props.posts[i].slug
@@ -66,10 +63,9 @@ export default class PostsList extends Component {
             return this.getPosts().map((post) =>(
                 <PostsListItem 
                     key={post._id} 
-                    title={post.title} 
-                    content={post.content} 
-                    tags={post.tags}
                     image={post.image}
+                    title={post.title} 
+                    tags={post.tags}
                     slug={post.slug}
                     parentPathname = {this.props.location.pathname}
                     />
@@ -112,10 +108,10 @@ export default createContainer(() => {
             return {
                 uid: post._id,
                 href: `/posts/${post._id}/edit`,
-                label: post.title,
-                content: post.content,
+                image: post.contents[0]["content"],
+                title: post.contents[1]["content"],
+                contents: post.contents,
                 tags: post.tags,
-                image: post.image,
                 slug: post.slug
             };
         })

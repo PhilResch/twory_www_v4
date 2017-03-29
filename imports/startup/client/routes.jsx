@@ -21,6 +21,7 @@ Meteor.startup( () => {
 				<Route path="/editor" component={ Editor } />
 				<Route path="/postsList" component={ PostsList } />
 				<Route path="/postsList/:slug" component={ Post } />
+				<Route path="/postsList/:slug/edit" component={ Editor } />
 				<Route path="*" component={ NotFound } />
 			</Route>
 		</Router>,

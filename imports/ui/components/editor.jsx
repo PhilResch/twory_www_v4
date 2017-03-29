@@ -17,6 +17,8 @@ export default class Editor extends Component {
 
     renderPost() {
         if(this.props.post) {
+            console.log("this.props.post: ");
+            console.log(this.props.post);
             return this.getFieldsFromPost();
         }
         else {
@@ -36,6 +38,7 @@ export default class Editor extends Component {
             <div>
                 {post.contents.map((item) => {
                     return <Content 
+                            key={item.key}
                             type={item.type}
                             content={item.content} 
                         />
@@ -44,19 +47,12 @@ export default class Editor extends Component {
         );
     }
     
-    createNewEmptyPost() {
+    uploadChanges() {
         event.preventDefault();
-        let newPost = {
-            title: "New post made on " + new Date().toUTCString(),
-            content: "Placeholder content",
-            tags: "",
-            slug: getSlug("New post made on " + new Date().toUTCString())
-        }
-        
-        return Meteor.call('createNewPost', newPost);
     }
 
     render() {
+        console.log(this.props);
         return (
             <form id="post-editor">
                 {this.renderPost()}
@@ -65,27 +61,25 @@ export default class Editor extends Component {
     }
 }
 
-Editor.defaultProps = {
-//SCHEMA FOR PostsCollection WAS DISABLED TO TEST THIS. REENABLE LATER!
-    post: {
-            tags: "",
-            contents: [
-                {
-                    type: "image",
-                    content: "/img/1.jpg"
-                },
-                {
-                    type: "title",
-                    content: "New post made on " + new Date().toUTCString(),
-                },
-                {
-                    type: "paragraph",
-                    content: "Lorem ipsum"
-                },
-                {
-                    type: "paragraph",
-                    content: "Dolor sit"
-                }
-            ],
-    }
-}
+export default createContainer((props) => {
+	console.log("createContainer receives:");
+    console.log(props);
+	postId=PostsCollection.findOne({slug: props.params.slug});
+    console.log(postId);
+	imagesCollectionSubscription = Meteor.subscribe('files.images.all');	
+	imagesCollectionIsLoading = !imagesCollectionSubscription.ready();
+	imageExists = !imagesCollectionIsLoading; 	
+	
+	singlePostSubscription = Meteor.subscribe('singlePost', props.params.slug);
+	singlePostIsLoading = !singlePostSubscription.ready();
+	singlePostExists = !singlePostIsLoading;
+
+	return {
+		imagesAreReady: imagesCollectionSubscription.ready(),
+		images: ImagesCollection.find().fetch(),
+		
+		postIsReady: singlePostSubscription.ready() ? true : false,
+		post: singlePostExists ? PostsCollection.findOne({slug: props.params.slug}) : undefined
+	};
+
+}, Editor)

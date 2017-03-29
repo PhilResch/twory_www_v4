@@ -39,7 +39,7 @@ export default class Navigation extends Component {
 		return defaultPages;
 	}
 
-	createDefaultPages() {
+	createDefaultPages() { // MOVE THIS TO SERVER SIDE, IDIOT.
 		let defaultPages = this.getDefaultPages();
 		for (let i=0; i < defaultPages.length; i++) {
 			Meteor.call('pagesCollection.insert', defaultPages[i]);
